@@ -1,0 +1,1 @@
+SBD = Ember.Application.create();
