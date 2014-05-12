@@ -1,4 +1,5 @@
 SBD = Ember.Application.create({
+  LOG_TRANSITIONS: true
   init: function() {
     console.log('created');
   }

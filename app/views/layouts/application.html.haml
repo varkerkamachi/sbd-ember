@@ -1,0 +1,15 @@
+!!!html
+%html
+  %head
+    %title="SBD"
+    =stylesheet_link_tag "application", media: "all", turbolinks: "true"
+    =javascript_include_tag "application", turbolinks: "true"
+    = csrf_meta_tags
+    %noscript="You must have javascript enabled to view this site."
+  
+  %body
+    %script{ type: "text/x-handlebars" }
+      .navbar
+      .container
+      %footer.container
+    / = yield  

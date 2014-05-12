@@ -5,7 +5,7 @@ gem 'rails', '4.0.3'
 
 gem 'ember-rails'
 gem 'ember-data-source'
-
+gem 'haml-rails'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 gem 'mysql2'
