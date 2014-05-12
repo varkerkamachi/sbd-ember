@@ -1,17 +1,12 @@
 class NotesController < ApplicationController
+  respond_to :json
+  
   def index
-    @notes = Note.all rescue nil
-    respond_to do |format|
-      format.html
-    end
-  end
-
-  def new
-    @note = Note.new
-  end
-
-  def edit
-    @note = Note.new
+    respond_with Note.all
+    # @notes = Note.all rescue nil
+    # respond_to do |format|
+    #   format.json { render json: @notes }
+    # end
   end
 
   def show
