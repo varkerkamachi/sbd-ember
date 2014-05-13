@@ -1,0 +1,2 @@
+each note in notes
+  li = note
