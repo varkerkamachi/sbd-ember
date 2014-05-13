@@ -25,9 +25,6 @@
         {{outlet}}
       %footer.container
     
-    %script{ type: "text/x-handlebars", data: { :'template-name' => "about" }}
-      %h1="About us"
-
     %script{ type: "text/x-handlebars", data: { :'template-name' => "index" }}
       %h1="Application layout Home#index"
       {{time}}
@@ -36,7 +33,7 @@
       {{#each note in notes}}
       {{note.name}}
       {{/each}}
-      %p="There are {{noteCount}} notes!"
+      %p="There are {{notesCount}} notes!"
       
 
     %script{ type: "text/x-handlebars", data: { :'template-name' => "notes/index" }}

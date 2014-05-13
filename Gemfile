@@ -4,10 +4,14 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.3'
 
 gem 'ember-rails'
-# gem 'ember-data-source'
+# to handle indented templating with haml & handlebars
+gem 'emblem-rails'
+gem 'ember-data-source'
 gem 'haml-rails'
 gem 'handlebars_assets'
+# to handle flattening of rails json into ember digestible
 gem 'active_model_serializers'
+
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 gem 'mysql2'
