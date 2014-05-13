@@ -1,0 +1,206 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+/*** ===================== 
+  CSS RESET ... ERIC MEYER'S: http://meyerweb.com/eric/tools/css/reset/ 
+===================== ***/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/*** ===================== 
+  MIXINS
+===================== ***/
+@mixin rounded($top, $right, $bottom:$top, $left:$right) {
+  border-radius:$top $right $bottom $left;
+  -moz-border-radius:$top $right $bottom $left;
+  -webkit-border-radius:$top $right $bottom $left;
+}
+@mixin box_shadowed($x, $y, $blur, $color) {
+  box-shadow:$x $y $blur $color;
+  -moz-box-shadow:$x $y $blur $color;
+  -webkit-box-shadow:$x $y $blur $color;
+}
+@mixin text_shadow($x, $y, $blur, $color) {
+  text-shadow:$x $y $blur $color;
+}
+
+/*** ===================== 
+  GLOBAL STYLES
+===================== ***/
+body {
+  background: url(#{asset_path('178589874-1.jpg', '')}) no-repeat center center fixed;
+  background-size: cover;
+  font:normal 14px/18px "verdana" ,"arial", "helvetica", sans-serif;
+}
+
+.logo {
+  color:#0d9f6e;
+  letter-spacing: 2px;
+  font-size:20px;
+  .network_text {
+    color:#ffffff;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  height:0;
+  display:block;
+  clear:both;
+  zoom:1;
+}
+
+
+/*** ===================== 
+  HOME PAGE
+===================== ***/
+
+.ribbon {
+  @include rounded(3px, 3px);
+  background:#353535;
+  padding: 3px;
+  margin:5px 10px;
+  color:#ffffff;
+  position:relative;
+  z-index:2;
+  ul {
+    li {
+      position:relative;
+      float:left;
+      text-align:center;
+      padding:4px 8px;
+      a {
+        color:#ffffff;
+        text-decoration:none;
+      }
+    }
+  }
+  &.top {
+    line-height:1.6em;
+    ul {
+      li {
+        a {
+          color:#fa7335;
+        }
+        &.license {
+          padding-left:5em;
+          padding-right:5em;
+        }
+        &.login,
+        &.greeting {
+          float:right;
+        }
+      }
+    }
+  }
+  &.menu {
+    height:20px;
+    margin-top:-2px;
+    ul {
+      li {
+        padding:1px 1.2em 4px;
+        &.tool_item {
+          float:right;
+          color:#cacacb;
+          a {
+            color:#cacacb;
+          }
+          &.reset {
+            padding-left:5em;
+            padding-right:5em;
+          }
+        }
+        &.user_address {
+          float:right;
+          font-size:12px;
+        }
+      }
+    }
+  }
+}
+
+.app_version {
+  position:absolute;
+  right:15px;
+  bottom:55px;
+  font-size:xx-small;
+  color:black;
+}
+
+#timeline {
+  position:absolute;
+  bottom: 5px;
+  left: 0px;
+  height: 42px;
+  width: 100%;
+  z-index: 2;
+  color: black;
+  background-color: rgb(206, 203, 203);
+  padding: 3px 5px;
+  border-width: 1px;
+  margin: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
