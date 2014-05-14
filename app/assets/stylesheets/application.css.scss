@@ -79,29 +79,56 @@ table {
 /*** ===================== 
   GLOBAL STYLES
 ===================== ***/
+html, body > .ember-view {
+  height: 100%;
+}
+
 body {
   background: url(#{asset_path('178589874-1.jpg', '')}) no-repeat center center fixed;
   background-size: cover;
   font:normal 14px/18px "verdana" ,"arial", "helvetica", sans-serif;
+  height: 100%;
 }
 
 .logo {
-  color:#0d9f6e;
   letter-spacing: 2px;
-  font-size:20px;
-  .network_text {
-    color:#ffffff;
+  font-size: 20px;
+  .logo_text {
+    color: #86c2de;
   }
+  .network_text {
+    color: #ffffff;
+  }
+}
+
+.main_wrapper {
+  width: 99%;
+  height: 100%;
+  margin: 10px auto 4px;
+  border: 1px solid red;
 }
 
 .clearfix:after {
   content: "";
-  height:0;
-  display:block;
-  clear:both;
-  zoom:1;
+  height: 0;
+  display: block;
+  clear: both;
+  zoom: 1;
 }
 
+
+/*** ===================== 
+  PALETTE
+===================== ***/
+$pale-blue: #e3f4fc;
+$light-blue: #86c2de;
+$light-border-gray: #c5c7c8;
+$pale-gray: #e9ebeb;
+$lp-gray: #cacacb;
+$mid-gray: #666b6d;
+$dark-blue: #0c2b39;
+$warm-brown: #675e5a;
+$orange: #fa7335;
 
 /*** ===================== 
   HOME PAGE
@@ -109,62 +136,63 @@ body {
 
 .ribbon {
   @include rounded(3px, 3px);
-  background:#353535;
+  background: $mid-gray;
   padding: 3px;
-  margin:5px 10px;
-  color:#ffffff;
-  position:relative;
-  z-index:2;
+  margin: 5px 10px;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
   ul {
     li {
-      position:relative;
-      float:left;
-      text-align:center;
-      padding:4px 8px;
+      position: relative;
+      float: left;
+      text-align: center;
+      padding: 4px 8px;
       a {
-        color:#ffffff;
-        text-decoration:none;
+        color: #ffffff;
+        text-decoration: none;
       }
     }
   }
   &.top {
-    line-height:1.6em;
+    line-height: 1.6em;
     ul {
       li {
         a {
-          color:#fa7335;
+          color: $orange;
         }
         &.license {
-          padding-left:5em;
-          padding-right:5em;
+          padding-left: 5em;
+          padding-right: 5em;
         }
         &.login,
         &.greeting {
-          float:right;
+          float: right;
         }
       }
     }
   }
   &.menu {
-    height:20px;
-    margin-top:-2px;
+    height: 20px;
+    margin-top: -2px;
+    background: $dark-blue;
     ul {
       li {
         padding:1px 1.2em 4px;
         &.tool_item {
-          float:right;
-          color:#cacacb;
+          float: right;
+          color: $lp-gray;
           a {
-            color:#cacacb;
+            color: $lp-gray;
           }
           &.reset {
-            padding-left:5em;
-            padding-right:5em;
+            padding-left: 5em;
+            padding-right: 5em;
           }
         }
         &.user_address {
-          float:right;
-          font-size:12px;
+          float: right;
+          font-size: 12px;
         }
       }
     }
@@ -172,16 +200,16 @@ body {
 }
 
 .app_version {
-  position:absolute;
-  right:15px;
-  bottom:55px;
-  font-size:xx-small;
-  color:black;
+  position: absolute;
+  right: 15px;
+  bottom: 55px;
+  font-size: xx-small;
+  color: black;
 }
 
 #timeline {
-  position:absolute;
-  bottom: 5px;
+  position: relative;
+  bottom: 15px;
   left: 0px;
   height: 42px;
   width: 100%;
@@ -193,6 +221,51 @@ body {
   margin: 0px;
 }
 
+
+
+/*** ===================== 
+  CONTENT PANES
+===================== ***/
+
+.pane {
+  position: relative;
+  margin: 5px auto 10px;
+  padding-bottom: 2px;
+  @include rounded(4px, 4px);
+  @include box_shadowed(0, 0, 4px, $mid-gray);
+  background:$pale-blue;
+
+  .title_bar {
+    text-align: center;
+    margin: 5px 10px;
+    
+    .pane_title {
+      @include text_shadow(0, 1px, 0, #ffffff);
+      font-size: 20px;
+      color: $dark-blue;
+      line-height: 1.65em;
+    }
+  }
+  
+  .pane_content {
+    background: #ffffff;
+    border: 2px solid $light-border-gray;
+    margin: 3px 8px 10px;
+    min-height: 300px;
+    
+    .data_row {
+      padding: 5px 8px;
+      font-size: 15px;
+      color: $warm-brown;
+      border-top: 1px solid $pale-gray;
+      border-bottom: 2px solid $pale-gray;
+      
+      &:hover {
+        background: lighten($pale-gray, 20%);
+      }
+    }
+  }
+}// end pane....
 
 
 

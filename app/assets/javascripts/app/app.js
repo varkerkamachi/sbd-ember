@@ -30,29 +30,3 @@ SBD.NoteRoute = Ember.Route.extend({
     return this.store.find('note', params.note_id);
   }
 });
-
-/* controllers */
-SBD.IndexController = Ember.Controller.extend({
-  time: function() {
-    return (new Date()).toDateString()
-  }.property()  
-});
-SBD.NotesController = Ember.ArrayController.extend({
-  notesCount: function() {
-    return this.get('length');
-  }.property('length'),
-  // notesCount: Ember.computed.alias('length'),
-  logo: "",
-  sortProperties: ['name'],
-  sortAscending: true
-});
-
-
-/* views .... */
-SBD.AboutView = Ember.View.extend({
-  templateName: 'app/about'
-});
-
-SBD.NotesIndexView = Ember.View.extend({
-  templateName: 'app/notes'
-});

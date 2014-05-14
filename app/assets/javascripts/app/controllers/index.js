@@ -1,5 +1,5 @@
-// SBD.IndexController = Ember.Controller.extend({
-//   time: function() {
-//     return (new Date()).toDateString()
-//   }.property()  
-// });
+SBD.IndexController = Ember.Controller.extend({
+  time: function() {
+    return (new Date()).toDateString()
+  }.property()  
+});

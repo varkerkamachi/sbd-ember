@@ -18,9 +18,9 @@
       .alert
         = alert
       %br/
-      = yield
-      %br/
-      {{outlet}}
+      / = yield
+      .main_wrapper
+        {{outlet}}
 
       =render partial: "layouts/timeline"
 
