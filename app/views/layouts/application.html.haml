@@ -8,23 +8,23 @@
     //%noscript="You must have javascript enabled to view this site."
   
   %body
-
     %script{ type: "text/x-handlebars", data: { :'template-name' => "application" }}
-      .navbar
-        %ul
-          %li
-            =link_to 'reset', ".#/"
-          %li
-            {{#link-to 'index' class='nav-link'}}Home{{/link-to}}
-          %li
-            {{#link-to 'about' class='nav-link' tagName='a'}}About{{/link-to}}
-          %li
-            {{#link-to 'notes' class='nav-link'}}Notes{{/link-to}}
+      .ribbon.top.clearfix
+        = render :partial => "/layouts/top_ribbon"
+      .ribbon.menu.clearfix
+        = render :partial => "/layouts/main_menu"
+      .notice
+        = notice
+      .alert
+        = alert
+      %br/
+      = yield
+      %br/
+      {{outlet}}
 
-      .container
-        {{outlet}}
-      %footer.container
-    
+      =render partial: "layouts/timeline"
+
+          
     %script{ type: "text/x-handlebars", data: { :'template-name' => "index" }}
       %h1="Application layout Home#index"
       {{time}}
