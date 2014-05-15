@@ -1,3 +1,3 @@
 SBD.AboutView = Ember.View.extend({
-  templateName: 'app/about'
+  templateName: 'app/about/about'
 });

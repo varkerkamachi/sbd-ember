@@ -9,38 +9,17 @@
   
   %body
     %script{ type: "text/x-handlebars", data: { :'template-name' => "application" }}
-      .ribbon.top.clearfix
-        = render :partial => "/layouts/top_ribbon"
-      .ribbon.menu.clearfix
-        = render :partial => "/layouts/main_menu"
-      .notice
-        = notice
-      .alert
-        = alert
-      %br/
-      / = yield
-      .main_wrapper
+      .main_wrapper.clearfix
+        .ribbon.top.clearfix
+          = render :partial => "/layouts/top_ribbon"
+        .ribbon.menu.clearfix
+          = render :partial => "/layouts/main_menu"
+        .notice
+          = notice
+        .alert
+          = alert
+        / = yield
         {{outlet}}
-
+      
       =render partial: "layouts/timeline"
-
-          
-    %script{ type: "text/x-handlebars", data: { :'template-name' => "index" }}
-      %h1="Application layout Home#index"
-      {{time}}
-    %script{ type: "text/x-handlebars", data: { :'template-name' => "notes" }}
-      {{outlet}}
-      {{#each note in notes}}
-      {{note.name}}
-      {{/each}}
-      %p="There are {{notesCount}} notes!"
-      
-
-    %script{ type: "text/x-handlebars", data: { :'template-name' => "notes/index" }}
-      %p="Notes INDEX!!"
-      
-
-    %script{ type: "text/x-handlebars", data: { :'template-name' => "note" }}
-      %p="Single note!"
-      
 

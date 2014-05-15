@@ -83,10 +83,14 @@ html, body > .ember-view {
   height: 100%;
 }
 
+.ember-view {
+  width: inherit;
+}
+
 body {
   background: url(#{asset_path('178589874-1.jpg', '')}) no-repeat center center fixed;
   background-size: cover;
-  font:normal 14px/18px "verdana" ,"arial", "helvetica", sans-serif;
+  font: normal 14px/18px "verdana" ,"arial", "helvetica", sans-serif;
   height: 100%;
 }
 
@@ -102,10 +106,10 @@ body {
 }
 
 .main_wrapper {
-  width: 99%;
+  width: inherit;
   height: 100%;
-  margin: 10px auto 4px;
-  border: 1px solid red;
+  margin: 0 1px -45px;
+  padding-bottom: 45px;
 }
 
 .clearfix:after {
@@ -138,7 +142,7 @@ $orange: #fa7335;
   @include rounded(3px, 3px);
   background: $mid-gray;
   padding: 3px;
-  margin: 5px 10px;
+  margin: 5px 0;
   color: #ffffff;
   position: relative;
   z-index: 2;
@@ -156,6 +160,7 @@ $orange: #fa7335;
   }
   &.top {
     line-height: 1.6em;
+    margin-top:1px;
     ul {
       li {
         a {
@@ -209,16 +214,16 @@ $orange: #fa7335;
 
 #timeline {
   position: relative;
-  bottom: 15px;
+  bottom: 0;
   left: 0px;
   height: 42px;
-  width: 100%;
+  width: inherit;
   z-index: 2;
   color: black;
   background-color: rgb(206, 203, 203);
   padding: 3px 5px;
   border-width: 1px;
-  margin: 0px;
+  margin: 0px 1px;
 }
 
 
@@ -229,8 +234,8 @@ $orange: #fa7335;
 
 .pane {
   position: relative;
-  margin: 5px auto 10px;
-  padding-bottom: 2px;
+  margin: 5px 2px 10px;
+  padding-bottom: 3px;
   @include rounded(4px, 4px);
   @include box_shadowed(0, 0, 4px, $mid-gray);
   background:$pale-blue;
@@ -250,7 +255,7 @@ $orange: #fa7335;
   .pane_content {
     background: #ffffff;
     border: 2px solid $light-border-gray;
-    margin: 3px 8px 10px;
+    margin: 2px 6px 6px;
     min-height: 300px;
     
     .data_row {
@@ -261,7 +266,7 @@ $orange: #fa7335;
       border-bottom: 2px solid $pale-gray;
       
       &:hover {
-        background: lighten($pale-gray, 20%);
+        background: darken($pale-gray, 7%);
       }
     }
   }

@@ -22,7 +22,7 @@ SBD.NotesRoute = Ember.Route.extend({
     return this.store.findAll('note');
   },
   setupController: function(controller, model) {
-    controller.set('model', model);
+    controller.set('notes', model);
   }
 });
 SBD.NoteRoute = Ember.Route.extend({
