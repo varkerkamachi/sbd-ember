@@ -1,2 +1,4 @@
-li.data_row.clearfix = name
+li.data_row.clearfix
+   = link-to 'note' note
+     | {{note.name}}
 

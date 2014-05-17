@@ -5,7 +5,7 @@ SBD = Ember.Application.create({
 
 /* Router */
 SBD.Router.map(function() {
-  this.route('root', { path: '/' });
+  this.route('root', { path: '' });
   this.route('about', { path: '/about' });
   this.resource('notes', function(){
     this.resource('note', { path: '/:note_id' });

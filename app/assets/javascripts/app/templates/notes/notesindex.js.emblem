@@ -1,1 +1,6 @@
-h1 notes index!!
+.pane
+  div.title_bar
+    .pane_title Notes
+      
+  .pane_content
+    = outlet

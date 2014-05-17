@@ -1,9 +1,3 @@
-.pane
-  div.title_bar
-    .pane_title Notes
-      
-  .pane_content
-    ul
-      each note in notes
-        = with note
-          = partial "app/notes/pane_data_item"
+ul
+  each note in notes
+    = partial "app/notes/pane_data_item"

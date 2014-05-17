@@ -1,1 +1,3 @@
-li.data_row.clearfix = note.name
+li = link-to 'notes' | Notes
+h2 = name
+p = note

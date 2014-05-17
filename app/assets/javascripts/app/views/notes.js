@@ -1,5 +1,5 @@
 SBD.NotesView = Ember.View.extend({
-  templateName: 'app/notes/notes',
+  templateName: 'app/notes/notesindex',
   attributeBindings: ['draggable'],
   draggable: true
   

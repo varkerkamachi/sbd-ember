@@ -7,19 +7,28 @@
     = csrf_meta_tags
     //%noscript="You must have javascript enabled to view this site."
   
-  %body
+  %body.full
+    =link_to "halves", "#" class: 'layout_setter', onclick: "setTemplate('ab')"
     %script{ type: "text/x-handlebars", data: { :'template-name' => "application" }}
-      .main_wrapper.clearfix
-        .ribbon.top.clearfix
-          = render :partial => "/layouts/top_ribbon"
-        .ribbon.menu.clearfix
-          = render :partial => "/layouts/main_menu"
-        .notice
-          = notice
-        .alert
-          = alert
-        / = yield
-        {{outlet}}
+      {{outlet}}
+      / .main_wrapper.clearfix
+      /   .ribbon.top.clearfix
+      /     = render :partial => "/layouts/top_ribbon"
+      /   .ribbon.menu.clearfix
+      /     = render :partial => "/layouts/main_menu"
+      /   .notice
+      /     = notice
+      /   .alert
+      /     = alert
+      /   / = yield
+      /   .layout_cell
       
       =render partial: "layouts/timeline"
+    
+    :javascript
+      $(document).ready(function() {
+        function setTemplate(amt) {
+          
+        }
+      });
 

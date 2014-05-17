@@ -84,7 +84,7 @@ html, body > .ember-view {
 }
 
 .ember-view {
-  width: inherit;
+  width: auto;
 }
 
 body {
@@ -92,8 +92,39 @@ body {
   background-size: cover;
   font: normal 14px/18px "verdana" ,"arial", "helvetica", sans-serif;
   height: 100%;
+  
+  .layout_cell {
+    float: left;
+    height: auto;
+  }
+  &.abc .layout_cell{
+    width: 33.025%;
+  }
+  &.aab .layout_cell:nth-child(odd) {
+    width: 33.025%;
+    float: right;
+  }
+  &.aab .layout_cell:nth-child(even) {
+    width: 66.15%;
+  }
+  &.abb .layout_cell:nth-child(odd) {
+    width: 66.15%;
+    float: right;
+  }
+  &.abb .layout_cell:nth-child(even) {
+    width: 33.025%;
+  }
+  &.ab .layout_cell {
+    width: 49.70%;
+  }
+  &.full .layout_cell {
+    float: none;
+    width: inherit;
+    margin: 0;
+  }
 }
 
+  
 .logo {
   letter-spacing: 2px;
   font-size: 20px;
@@ -106,7 +137,6 @@ body {
 }
 
 .main_wrapper {
-  width: inherit;
   height: 100%;
   margin: 0 1px -45px;
   padding-bottom: 45px;
@@ -238,6 +268,7 @@ $orange: #fa7335;
   padding-bottom: 3px;
   @include rounded(4px, 4px);
   @include box_shadowed(0, 0, 4px, $mid-gray);
+  min-height: 25%;
   background:$pale-blue;
 
   .title_bar {

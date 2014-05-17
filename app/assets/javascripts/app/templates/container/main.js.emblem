@@ -1,0 +1,10 @@
+.main_wrapper.clearfix
+  .ribbon.top.clearfix
+    = partial "app/layout/top_ribbon"
+  .ribbon.menu.clearfix
+    = partial "app/layout/main_menu"
+  .notice
+    = notice
+  .alert
+    = alert
+  = outlet
