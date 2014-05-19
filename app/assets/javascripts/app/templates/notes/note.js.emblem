@@ -1,3 +1,4 @@
-li = link-to 'notes' | Notes
+li = link-to 'notes.new' | New Note
+li = link-to 'notes' | << Back to notes
 h2 = name
 p = note

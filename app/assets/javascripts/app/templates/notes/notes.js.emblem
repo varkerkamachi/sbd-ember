@@ -1,3 +1,4 @@
+= link-to 'notes.new' | New Note
 ul
   each note in notes
     = partial "app/notes/pane_data_item"

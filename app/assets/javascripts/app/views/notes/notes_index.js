@@ -1,3 +1,3 @@
 SBD.NotesIndexView = Ember.View.extend({
-  templateName: 'app/notesindex'
+  templateName: 'app/notes/notesindex'
 });

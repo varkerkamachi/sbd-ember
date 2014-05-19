@@ -4,12 +4,14 @@ SBD = Ember.Application.create({
 });
 
 /* Router */
+SBD.Router = Ember.Router.extend();
 SBD.Router.map(function() {
-  this.route('root', { path: '' });
   this.route('about', { path: '/about' });
+
   this.resource('notes', function(){
-    this.resource('note', { path: '/:note_id' });
+    this.route('new');
   });
+  this.resource('note', { path: 'notes/:note_id' });
 });
 
 /* Store and models */
@@ -17,6 +19,12 @@ SBD.ApplicationAdapter = DS.RESTAdapter.extend();
 
 
 /* routes */
+SBD.AboutRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    controller.set('about', "model");
+  }
+});
+
 SBD.NotesRoute = Ember.Route.extend({
   model: function() {
     return this.store.findAll('note');
@@ -25,8 +33,15 @@ SBD.NotesRoute = Ember.Route.extend({
     controller.set('notes', model);
   }
 });
+
 SBD.NoteRoute = Ember.Route.extend({
   model: function(params) {
     return this.store.find('note', params.note_id);
+  }
+});
+
+SBD.NotesNewRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render({ outlet: 'modelForm' });
   }
 });

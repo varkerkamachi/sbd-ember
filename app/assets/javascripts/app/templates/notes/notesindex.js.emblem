@@ -3,4 +3,5 @@
     .pane_title Notes
       
   .pane_content
-    = outlet
+    = outlet modelForm
+    = yield
