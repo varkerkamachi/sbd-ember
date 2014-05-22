@@ -1,2 +1,9 @@
 li = link-to 'notes' | << Back to notes from new
 h2 New Note
+form
+  p
+    Ember.TextField valueBinding="noteName"
+  p
+    Ember.TextField valueBinding="noteNote"
+  p
+    button click=createNote Create note

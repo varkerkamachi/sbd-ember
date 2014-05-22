@@ -17,7 +17,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = Note.new(params[:note])
+    @note = Note.new(note_params)
     respond_to do |format|
       if @note.save
         format.json { render json: @note, status: :created }
@@ -30,7 +30,7 @@ class NotesController < ApplicationController
   def update
     @note = Note.find(params[:id]) rescue nil
     respond_to do |format|
-      if @note.update_attributes(params[:note])
+      if @note.update!(note_params)
         format.json { render json: nil, status: :ok }
       else
         format.json { render json: @note.errors, status: :unprocessable_entity }
@@ -45,4 +45,9 @@ class NotesController < ApplicationController
       format.json { render json: nil, status: :ok }
     end
   end
+  
+  private
+   def note_params
+     params.require(:note).permit(:note, :name)
+   end
 end

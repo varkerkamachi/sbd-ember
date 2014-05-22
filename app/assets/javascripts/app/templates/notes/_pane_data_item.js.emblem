@@ -1,4 +1,6 @@
 li.data_row.clearfix
-   = link-to 'note' note
-     | {{note.name}}
+  = link-to 'note' note
+    | {{note.name}}
+  a.right click="deleteNote note"
+    | delete
 
