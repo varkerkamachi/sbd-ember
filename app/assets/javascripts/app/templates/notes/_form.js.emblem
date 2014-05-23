@@ -1,1 +1,11 @@
 h2 Note form
+form
+  p
+    Ember.TextField valueBinding="noteName" value="name"
+  p
+    Ember.TextField valueBinding="noteNote" value="note"
+  p
+    = if note.id
+      button click=editNote Update
+    = else
+      button click=createNote Save

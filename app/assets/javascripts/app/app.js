@@ -10,6 +10,7 @@ SBD.Router.map(function() {
 
   this.resource('notes', function(){
     this.route('new');
+    this.route('edit', { path: ':note_id/edit' });
   });
   this.resource('note', { path: 'notes/:note_id' });
 });
@@ -31,24 +32,6 @@ SBD.NotesRoute = Ember.Route.extend({
   },
   setupController: function(controller, model) {
     controller.set('notes', model);
-  },
-  actions: {
-    deleteNote: function(note) {
-      // v removes record from UI but not from model..
-      // var nm = this.store.find('note', note.id);
-      // nm.deleteRecord();
-      // this.store.deleteRecord();
-      // this.store.save();
-      // nm.destroyRecord();
-      // var nms = this.store.findAll('note');
-      // alert(nms.length);
-      // nm.save();
-      // alert(this.modelFor('notes') + "\n\n" + this.get('model'));
-      // elm.removeObject(note);
-      // elm.save();
-      // console.log(elms + "\n" + this.get('model') + "\nlen: " + elms.length);
-      // elms.removeObject(note);
-    }
   }
 });
 
@@ -59,6 +42,15 @@ SBD.NoteRoute = Ember.Route.extend({
 });
 
 SBD.NotesNewRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render({ outlet: 'modelForm' });
+  }
+});
+
+SBD.NotesEditRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('note', params.note_id);
+  },
   renderTemplate: function() {
     this.render({ outlet: 'modelForm' });
   }

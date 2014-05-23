@@ -1,2 +1,6 @@
-h2 = Editing!!!
-note.name
+li = link-to 'notes' | << Back to notes from edit
+h2 Editing #
+  id
+  !
+h2 = name
+= partial "app/notes/form"
