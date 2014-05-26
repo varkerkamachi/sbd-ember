@@ -12,6 +12,7 @@ SBD.Router.map(function() {
     this.route('new');
     this.route('edit', { path: ':note_id/edit' });
   });
+  // this is so we can use a template that doesn't inherit from "notes"
   this.resource('note', { path: 'notes/:note_id' });
 });
 
@@ -38,7 +39,10 @@ SBD.NotesRoute = Ember.Route.extend({
 SBD.NoteRoute = Ember.Route.extend({
   model: function(params) {
     return this.store.find('note', params.note_id);
-  }  
+  },
+  setupController: function(controller, model) {
+    controller.set('note', model);
+  }
 });
 
 SBD.NotesNewRoute = Ember.Route.extend({

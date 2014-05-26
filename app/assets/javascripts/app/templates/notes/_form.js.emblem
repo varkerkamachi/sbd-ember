@@ -1,11 +1,16 @@
-h2 Note form
+h2 Create a new note
 form
   p
-    Ember.TextField valueBinding="noteName" value="name"
+    Ember.TextField valueBinding="name"
+    p
+      | Preview:
+      %br
+      =name
   p
-    Ember.TextField valueBinding="noteNote" value="note"
+    Ember.TextArea valueBinding="note"
+    p 
+      | preview:
+      %br
+      =note
   p
-    = if note.id
-      button click=editNote Update
-    = else
-      button click=createNote Save
+    button click=createNote Save

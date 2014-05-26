@@ -1,4 +1,23 @@
-li = link-to 'notes.new' | New Note
 li = link-to 'notes' | << Back to notes
-h2 = name
-p = note
+
+p click=editNote Editing: #{this.isEditing}
+= if this.isEditing
+  form
+    p
+      Ember.TextField valueBinding="note.name"
+      p
+        | Preview:
+        %br
+        =note.name
+    p
+      Ember.TextArea valueBinding="note.note"
+      p 
+        | preview:
+        %br
+        =note.note
+    p
+      button click=updateNote Update
+
+= else
+  h2 = note.name
+  p = note.note

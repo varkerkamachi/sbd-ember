@@ -1,8 +1,8 @@
 li.data_row.clearfix
   = link-to 'note' note
     | {{note.name}}
+
   a.right click="deleteNote note"
     '  delete &nbsp;
-  =link-to 'notes.edit' note class='right'
-    |edit   
+  span.right click=editNote edit
 
