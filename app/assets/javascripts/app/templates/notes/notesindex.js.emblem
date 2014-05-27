@@ -1,7 +1,13 @@
 .pane
   div.title_bar
     .pane_title Notes
+
+    button click="toggleNewForm '.new_form_button'" class='new_form_button' Add New
       
   .pane_content
-    = outlet modelForm
     = yield
+
+    .new_form_wrapper
+      / = outlet modelForm
+      = partial 'app/notes/form'
+

@@ -12,13 +12,16 @@ SBD.NoteController = Ember.Controller.extend({
       note.set('note', noteNote);
       //save
       note.save();
+      //reset editing property to false
+      this.toggleProperty('isEditing');
       //bounce back to index
       this.transitionToRoute('notes');
     },
     editNote: function(note) {
+      console.log('controller: ' + this.get('controller'));
+      
       this.toggleProperty('isEditing');
-      console.log("\nediting?" + this.isEditing);
-      console.log('\nediting in the controller');
+      // this.transitionToRoute('note/:note_id');
     },
     
   }

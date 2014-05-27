@@ -95,6 +95,10 @@ html, body > .ember-view {
   width: auto;
 }
 
+.hidden {
+  display:none;
+}
+
 body {
 //  background: url(#{asset_path('178589874-1.jpg', '')}) no-repeat center center fixed;
 //  background-size: cover;
@@ -280,18 +284,37 @@ $orange: #fa7335;
   background:$pale-blue;
 
   .title_bar {
-    text-align: center;
+    position:relative;
+    text-align: left;
     margin: 5px 10px;
     
+    .new_form_button {
+      position:absolute;
+      top:5px;
+      right:0px;
+      @include rounded(2px, 2px);
+      padding:5px;
+      text-align:center;
+      background: lighten($pale-blue, 5%);
+      border:1px solid darken($pale-blue, 10%);
+      text-decoration:none;
+      
+      &:hover {
+        border: 1px solid lighten($pale-blue, 15%);
+        background: darken($pale-blue, 5%);
+      }
+    }
     .pane_title {
       @include text_shadow(0, 1px, 0, #ffffff);
       font-size: 20px;
       color: $dark-blue;
       line-height: 1.65em;
+      
     }
   }
   
   .pane_content {
+    position:relative;
     background: #ffffff;
     border: 2px solid $light-border-gray;
     margin: 2px 6px 6px;
@@ -312,7 +335,21 @@ $orange: #fa7335;
 }// end pane....
 
 
+/*** ===================== 
+  NEW FORM
+===================== ***/
 
+.new_form_wrapper {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  padding: 5px 20px 10px;
+  display: none;
+  @include box_shadowed(-1px, 1px, 4px, $mid-gray);
+  @include rounded(0, 0, 0, 4px);
+  background: $pale-blue;
+  z-index: 2;
+}
 
 
 

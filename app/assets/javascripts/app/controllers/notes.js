@@ -7,7 +7,7 @@ SBD.NotesController = Ember.ArrayController.extend({
   sortProperties: ['name'],
   sortAscending: true,
   init: function(note) {
-    console.log("\nediting?" + this.notesCount);
+    console.log("\nediting?" + this.get('notesCount'));
     // noneInEditMode();
   },
   
@@ -15,7 +15,7 @@ SBD.NotesController = Ember.ArrayController.extend({
     console.log('none in edit..');
     return this.setEach('isEditing', false);
   }.property('@each.isEditing'),
-  
+
   /*
   allAreDone: function(key, value) {
     if (value === undefined) {
@@ -28,6 +28,36 @@ SBD.NotesController = Ember.ArrayController.extend({
   }.property('@each.isCompleted')
   */
   actions: {
+    toggleNewForm: function(className) {
+      console.log(className + "...class<<");
+      var cText = $(className).text();
+      console.log('ctext: ' + cText);
+      var f = this.send('swapButtonText', className, cText);
+      $('.new_form_wrapper').animate({
+        visibility: "toggle",
+      }, 350, function() { f; });
+    },
+    
+    swapButtonText: function(el, text) {
+      $(el).text(text == 'Add New' ? 'Cancel' : 'Add New');
+    },
+    
+    createNote: function() {
+      var name = this.get('name');
+      var note = this.get('note');
+      // if(!name.trim()) { return; }
+      var noteObj = this.store.createRecord('note', {
+          name: name,
+          note: note
+        });
+      this.set('name', '');
+      this.set('note', '');
+        
+      noteObj.save();
+      this.send('toggleNewForm');
+      this.transitionToRoute('notes');
+    },
+    
     deleteNote: function(note) {
       // passed by action from view to controller...if not here then it looks in Route
       this.get('store').find('note', note.id).then(function(record){
@@ -35,11 +65,6 @@ SBD.NotesController = Ember.ArrayController.extend({
         record.save();
       });
     },
-    // editNote: function(note) {
-    //   this.toggleProperty('isEditing');
-    //   console.log("\nediting?" + this.isEditing);
-    //   console.log('\nediting in the controller');
-    // },
     updateNote: function(note) {
       var name = note.get('name');
       var note = note.get('note');

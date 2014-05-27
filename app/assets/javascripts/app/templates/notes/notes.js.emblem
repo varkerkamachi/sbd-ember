@@ -1,4 +1,3 @@
-= link-to 'notes.new' | New Note
-ul
+ul.results_list
   each note in notes
     = partial "app/notes/pane_data_item"

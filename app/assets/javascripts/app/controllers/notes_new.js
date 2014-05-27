@@ -13,6 +13,7 @@ SBD.NotesNewController = Ember.Controller.extend({
       this.set('note', '');
         
       noteObj.save();
+      // this.toggleNewForm();
       this.transitionToRoute('notes');
     },
   }  

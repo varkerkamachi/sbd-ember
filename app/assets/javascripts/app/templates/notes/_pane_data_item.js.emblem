@@ -4,5 +4,6 @@ li.data_row.clearfix
 
   a.right click="deleteNote note"
     '  delete &nbsp;
-  span.right click=editNote edit
+  = link-to 'note' note click="editNote note" class="right"
+    ' edit
 
