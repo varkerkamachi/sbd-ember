@@ -16,6 +16,10 @@ SBD.NotesController = Ember.ArrayController.extend({
     return this.setEach('isEditing', false);
   }.property('@each.isEditing'),
 
+  paneTitle: function() {
+    return "Notes"
+  }.property(),
+
   /*
   allAreDone: function(key, value) {
     if (value === undefined) {
@@ -64,18 +68,7 @@ SBD.NotesController = Ember.ArrayController.extend({
         record.deleteRecord();
         record.save();
       });
-    },
-    updateNote: function(note) {
-      var name = note.get('name');
-      var note = note.get('note');
-      
-      note.set('name', name);
-      note.set('note', note);
-      
-      note.save();
-      transitionToRoute('notes');
-    }
-    
+    }    
   }
     
 });

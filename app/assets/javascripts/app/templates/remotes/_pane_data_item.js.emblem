@@ -1,0 +1,9 @@
+li.data_row.clearfix
+  = link-to 'remote' remote.id
+    | {{remote.name}}
+
+  a.right click="deleteRemote remote"
+    '  delete &nbsp;
+  = link-to 'remote' remote click="editRemote remote.id" class="right"
+    ' edit
+

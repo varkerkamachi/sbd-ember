@@ -1,0 +1,22 @@
+h2 Create a new remote
+form
+  p
+    Ember.TextField valueBinding="name"
+    p
+      | Preview:
+      %br
+      =name
+  p
+    Ember.TextField valueBinding="url"
+    p
+      | Preview:
+      %br
+      =url
+  p
+    Ember.TextArea valueBinding="note"
+    p 
+      | preview:
+      %br
+      =note
+  p
+    button click=createRemote Save

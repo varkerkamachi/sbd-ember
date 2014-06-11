@@ -1,0 +1,30 @@
+li = link-to 'remotes' | << Back to remotes
+
+p click=editRemote Editing: #{this.isEditing}
+= if this.isEditing
+  form
+    p
+      Ember.TextField valueBinding="remote.name"
+      p
+        | Preview:
+        %br
+        =remote.name
+    p
+      Ember.TextField valueBinding="remote.url"
+      p
+        | Preview:
+        %br
+        =remote.url
+
+    p
+      Ember.TextArea valueBinding="remote.note"
+      p 
+        | preview:
+        %br
+        =remote.note
+    p
+      button click=updateRemote Update
+
+= else
+  h2 = remote.name
+  p = remote.note

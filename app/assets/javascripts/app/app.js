@@ -8,6 +8,12 @@ SBD.Router = Ember.Router.extend();
 SBD.Router.map(function() {
   this.route('about', { path: '/about' });
 
+  this.resource('remotes', function() {
+    this.route('new');
+    this.route('edit', { path: ':remote_id/edit' });
+  });
+  this.resource('remote', { path: 'remotes/:remote_id' });
+
   this.resource('notes', function(){
     this.route('new');
     this.route('edit', { path: ':note_id/edit' });
@@ -24,6 +30,36 @@ SBD.ApplicationAdapter = DS.RESTAdapter.extend();
 SBD.AboutRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     controller.set('about', "model");
+  }
+});
+SBD.RemotesRoute = Ember.Route.extend({
+  model: function() {
+    return this.store.findAll('remote');
+  },
+  setupController: function(controller, model) {
+    controller.set('remotes', model);
+  }
+});
+SBD.RemoteRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('remote', params.remote_id);
+  },
+  setupController: function(controller, model) {
+    controller.set('remote', model);
+    console.log("model: " + model);
+}
+});
+SBD.RemotesNewRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render({ outlet: 'modelForm' });
+  }
+});
+SBD.RemotesEditRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('remote', params.remote_id);
+  },
+  renderTemplate: function() {
+    this.render({ outlet: 'modelForm' });
   }
 });
 

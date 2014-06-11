@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140511070403) do
+ActiveRecord::Schema.define(version: 20140610234431) do
 
   create_table "notes", force: true do |t|
     t.string   "name"
@@ -19,5 +19,18 @@ ActiveRecord::Schema.define(version: 20140511070403) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "remotes", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.text     "note"
+    t.integer  "configuration_system_id"
+    t.integer  "audit_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "remotes", ["audit_id"], name: "index_remotes_on_audit_id", using: :btree
+  add_index "remotes", ["configuration_system_id"], name: "index_remotes_on_configuration_system_id", using: :btree
 
 end
