@@ -58,6 +58,36 @@ table {
 	border-spacing: 0;
 }
 
+a,
+a:visited,
+a:hover,
+a:active { text-decoration: none; }
+
+h1 { font-size: 2.65em; }
+h2 { font-size: 2.22em; }
+h3 { font-size: 1.48em; }
+h4 { font-size: 1.19em; }
+h5 { font-size: 1.18em; }
+h6 { font-size: 0.94em; }
+
+
+/*** ===================== 
+  PALETTE
+===================== ***/
+$pale-blue: #e3f4fc;
+$light-blue: #86c2de;
+$light-border-gray: #c5c7c8;
+$pale-gray: #e9ebeb;
+$lp-gray: #cacacb;
+$mid-gray: #666b6d;
+$dark-blue: #0c2b39;
+$warm-brown: #675e5a;
+$orange: #fa7335;
+$cool-green: #0d9f6e;
+$green-gray: #8DB2A6;
+$text: #0F2B4F;
+$ivory: #f4f3ef;
+
 
 /*** ===================== 
   MIXINS
@@ -99,41 +129,45 @@ html, body > .ember-view {
   display:none;
 }
 
+.full_height {
+  height: inherit;
+}
+
 body {
   background: url(#{asset_path('178589874-1.jpg')}) no-repeat center center fixed;
   background-size: cover;
-  font: normal 14px/18px "verdana" ,"arial", "helvetica", sans-serif;
+  font: normal 0.985em/1.295em "verdana" ,"arial", "helvetica", sans-serif;
   height: 100%;
-  
-  .layout_cell {
-    float: left;
-    height: auto;
-  }
-  &.abc .layout_cell{
-    width: 33.025%;
-  }
-  &.aab .layout_cell:nth-child(odd) {
-    width: 33.025%;
-    float: right;
-  }
-  &.aab .layout_cell:nth-child(even) {
-    width: 66.15%;
-  }
-  &.abb .layout_cell:nth-child(odd) {
-    width: 66.15%;
-    float: right;
-  }
-  &.abb .layout_cell:nth-child(even) {
-    width: 33.025%;
-  }
-  &.ab .layout_cell {
-    width: 49.70%;
-  }
-  &.full .layout_cell {
-    float: none;
-    width: inherit;
-    margin: 0;
-  }
+  color: $text;
+}
+.layout_cell {
+  float: left;
+  height: auto;
+}
+.abc .layout_cell{
+  width: 33.025%;
+}
+.aab .layout_cell:nth-child(odd) {
+  width: 33.025%;
+  float: right;
+}
+.aab .layout_cell:nth-child(even) {
+  width: 66.15%;
+}
+.abb .layout_cell:nth-child(odd) {
+  width: 66.15%;
+  float: right;
+}
+.abb .layout_cell:nth-child(even) {
+  width: 33.025%;
+}
+.ab .layout_cell {
+  width: 49.70%;
+}
+.full .layout_cell {
+  float: none;
+  width: inherit;
+  margin: 0;
 }
 
   
@@ -141,7 +175,7 @@ body {
   letter-spacing: 2px;
   font-size: 20px;
   .logo_text {
-    color: #86c2de;
+    color: $light-blue;
   }
   .network_text {
     color: #ffffff;
@@ -162,29 +196,15 @@ body {
   zoom: 1;
 }
 
-
-/*** ===================== 
-  PALETTE
-===================== ***/
-$pale-blue: #e3f4fc;
-$light-blue: #86c2de;
-$light-border-gray: #c5c7c8;
-$pale-gray: #e9ebeb;
-$lp-gray: #cacacb;
-$mid-gray: #666b6d;
-$dark-blue: #0c2b39;
-$warm-brown: #675e5a;
-$orange: #fa7335;
-
 /*** ===================== 
   HOME PAGE
 ===================== ***/
 
 .ribbon {
-  @include rounded(3px, 3px);
+  // @include rounded(3px, 3px);
   background: $mid-gray;
   padding: 3px;
-  margin: 5px 0;
+  margin: 5px 0 3px;
   color: #ffffff;
   position: relative;
   z-index: 2;
@@ -222,6 +242,7 @@ $orange: #fa7335;
   &.menu {
     height: 20px;
     margin-top: -2px;
+    margin-bottom: 1px;
     background: $dark-blue;
     ul {
       li {
@@ -256,11 +277,11 @@ $orange: #fa7335;
 
 #timeline {
   position: relative;
-  bottom: 0;
+  bottom: -38px;
   left: 0px;
   height: 42px;
   width: inherit;
-  z-index: 2;
+  z-index: -1;
   color: black;
   background-color: rgb(206, 203, 203);
   padding: 3px 5px;
@@ -273,21 +294,25 @@ $orange: #fa7335;
 /*** ===================== 
   CONTENT PANES
 ===================== ***/
-
-.pane {
-  position: relative;
-  margin: 5px 2px 10px;
-  padding-bottom: 3px;
-  @include rounded(4px, 4px);
-  @include box_shadowed(0, 0, 4px, $mid-gray);
-  min-height: 25%;
-  background:$pale-blue;
-
-  .title_bar {
+.title_bar {
     position:relative;
     text-align: left;
     margin: 5px 10px;
-    
+}
+
+.pane {
+  position: relative;
+  margin: 0 auto 10px;
+  padding-bottom: 3px;
+  // @include rounded(3px, 3px);
+  @include box_shadowed(0, 0, 4px, $mid-gray);
+  min-height: 25%;
+  height: 100%;
+  width: 80%;
+  background: rgba(255,255,255,.85);
+
+  .title_bar {
+    @extend .title_bar;    
     .new_form_button {
       position:absolute;
       top:5px;
@@ -315,26 +340,51 @@ $orange: #fa7335;
   
   .pane_content {
     position:relative;
-    background: #ffffff;
-    border: 2px solid $light-border-gray;
+    background: rgba(255,255,255, .8);
+    border: 1px solid $light-border-gray;
     margin: 2px 6px 6px;
     min-height: 300px;
     
     .data_row {
-      padding: 5px 8px;
+      padding: 10px 8px 9px;
       font-size: 15px;
       color: $warm-brown;
-      border-top: 1px solid $pale-gray;
-      border-bottom: 2px solid $pale-gray;
+      border-bottom: 1px solid $pale-gray;
+      -webkit-transition: background linear .25s;
+      transition: background linear .25s;
       
       &:hover {
-        background: darken($pale-gray, 7%);
+        background: rgba(lighten($pale-blue, 3%), .9);
+        cursor: pointer;
+
+        * {
+          color: invert($warm-brown);
+        }
       }
     }
   }
 }// end pane....
 
+.widget {
+  position: relative;
+  margin: 10px 20px 15px;
+  background: #ffffff;
+  border: 4px solid $ivory;
+  @include box_shadowed(0, 0, 1px, 0 $dark-blue);
+  @include rounded(3px, 3px);
 
+  .title_bar {
+    @extend .title_bar;
+    padding: 2px 8px;
+    color: $warm-brown;    
+  }
+
+  .content {
+    padding: 20px;
+    font-size: .78em;
+    color: $dark-blue;
+  }
+}
 /*** ===================== 
   NEW FORM
 ===================== ***/

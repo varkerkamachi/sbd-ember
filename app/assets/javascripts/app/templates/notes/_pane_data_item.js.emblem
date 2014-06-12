@@ -1,4 +1,4 @@
-li.data_row.clearfix
+li.data_row click="editNote note"
   = link-to 'note' note
     | {{note.name}}
 

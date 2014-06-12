@@ -3,6 +3,7 @@ SBD.NotesView = Ember.View.extend({
   templateName: 'app/notes/notes',
   attributeBindings: ['draggable'],
   draggable: true,
+  classNames: 'full_height',
   
   paneTitle: function() {
     return "Notes"
