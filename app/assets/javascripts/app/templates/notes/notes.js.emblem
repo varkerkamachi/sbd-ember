@@ -1,5 +1,5 @@
 .aab
-  .layout_cell.clearfix
+  .layout_cell
     .search.widget.clearfix
       .title_bar
         h6 Search

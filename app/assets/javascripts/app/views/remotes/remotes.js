@@ -3,5 +3,6 @@ SBD.RemotesView = Ember.View.extend({
   templateName: 'app/remotes/remotes',
   attributeBindings: ['draggable'],
   draggable: true,
+  classNames: 'full_height',
   
 });

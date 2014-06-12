@@ -1,3 +1,19 @@
-ul.results_list
-  each remote in remotes
-    = partial "app/remotes/pane_data_item"
+.aab
+  .layout_cell
+    .search.widget.clearfix
+      .title_bar
+        h6 Search
+      .content
+ 
+    .recent.widget
+      .title_bar
+        h6 Recently updated
+      .content
+        |
+          Content here
+
+  .layout_cell
+    ul.results_list
+      each remote in remotes
+        = partial "app/remotes/pane_data_item"
+
