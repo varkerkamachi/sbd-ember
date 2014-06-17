@@ -175,7 +175,7 @@ body {
   letter-spacing: 2px;
   font-size: 20px;
   .logo_text {
-    color: $light-blue;
+    color: $cool-green;//$light-blue;
   }
   .network_text {
     color: #ffffff;
@@ -202,7 +202,7 @@ body {
 
 .ribbon {
   // @include rounded(3px, 3px);
-  background: $mid-gray;
+  background: $dark-blue;//$mid-gray;
   padding: 3px;
   margin: 5px 0 3px;
   color: #ffffff;
@@ -215,8 +215,17 @@ body {
       text-align: center;
       padding: 4px 8px;
       a {
-        color: #ffffff;
+        color: $ivory;
         text-decoration: none;
+        transition: color linear 0.32s;
+        &.nav-link {
+          display: block;
+          font-size: 0.87em;
+
+          &:hover {
+            color: $green-gray;
+          }
+        }
       }
     }
   }
@@ -243,7 +252,7 @@ body {
     height: 20px;
     margin-top: -2px;
     margin-bottom: 1px;
-    background: $dark-blue;
+    background: $mid-gray;//$dark-blue;
     ul {
       li {
         padding:1px 1.2em 4px;
