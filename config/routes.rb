@@ -1,5 +1,6 @@
 Sbd::Application.routes.draw do
 
+  devise_for :users
   resources :notes
   resources :remotes
   # The priority is based upon order of creation: first created -> highest priority.
