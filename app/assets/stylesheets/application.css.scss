@@ -306,7 +306,8 @@ body {
 .title_bar {
     position:relative;
     text-align: left;
-    margin: 5px 10px;
+    padding: 5px 10px;
+    background: $light-blue;
 }
 
 .pane {
@@ -325,7 +326,7 @@ body {
     .new_form_button {
       position:absolute;
       top:5px;
-      right:0px;
+      right:6px;
       @include rounded(2px, 2px);
       padding:5px;
       text-align:center;
@@ -339,9 +340,9 @@ body {
       }
     }
     .pane_title {
-      @include text_shadow(0, 1px, 0, #ffffff);
+      @include text_shadow(0, 0, 2px, $dark-blue);
       font-size: 20px;
-      color: $dark-blue;
+      color: $pale-blue;
       line-height: 1.65em;
       
     }
@@ -390,7 +391,7 @@ body {
 
   .content {
     padding: 20px;
-    font-size: .78em;
+    font-size: 0.78em;
     color: $dark-blue;
   }
 }
@@ -400,15 +401,85 @@ body {
 
 .new_form_wrapper {
   position: absolute;
-  top: -1px;
-  right: -1px;
+  top: -2px;
+  right: -5px;
   padding: 5px 20px 10px;
   display: none;
   @include box_shadowed(-1px, 1px, 4px, $mid-gray);
   @include rounded(0, 0, 0, 4px);
-  background: $pale-blue;
+  background: $light-blue;
   z-index: 2;
+  width: 35%;
 }
+
+form {
+  input[type='text'],
+  input[type='password'],
+  textarea {
+    @include rounded(4px, 4px);
+    padding: 6px 8px;
+    border: 0;
+    box-shadow: 0 1px 1px $lp-gray,
+                0 -1px 2px $lp-gray;
+  }
+  select {
+    padding: 6px 8px;
+    border: 0;    
+  }
+}
+
+label {
+  padding-right: 2%;
+  text-align: right;
+  font-size: 0.85em;
+  @include text_shadow(0, 1px, 0, $light-blue);  
+}
+
+.preview_text {
+  font: italic 0.72em/0.88em sans-serif;
+}
+
+.content_table {
+  width: 99%;
+  margin: 2px auto;
+  .content_table_row {
+    padding: 4px 0;
+    margin-bottom: 8px;
+  }
+
+  .content_table_row:before,
+  .content_table_row:after {
+    display: table;
+  }
+
+  .content_table_cell {
+    display: block;
+    padding: 0;
+    margin-left: 21%;
+    line-height: 1.4em;
+    min-height: 26px;
+    text-align: left;
+
+    &.label {
+      @extend label;
+      float: left;
+      margin-left: 0;
+      width: 18%;
+      max-width: 18%;
+      color: $dark-blue;
+    }
+  }
+
+  .content_table_cell input[type='text'],
+  .content_table_cell select,
+  .content_table_cell textarea,
+  .content_table_cell input[type='password'] {
+    width: 95%;
+  }
+
+}
+
+
 
 
 
