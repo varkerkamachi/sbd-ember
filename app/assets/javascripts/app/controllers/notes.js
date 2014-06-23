@@ -4,18 +4,12 @@ SBD.NotesController = Ember.ArrayController.extend({
   }.property('length'),
   // notesCount: Ember.computed.alias('length'),
   logo: "",
-  sortProperties: ['name'],
-  sortAscending: true,
-  init: function(note) {
-    console.log("\nediting?" + this.get('notesCount'));
-    // noneInEditMode();
+  sortProperties: ['updated_at:desc', 'name:asc'],
+  //sortAscending: true,
+  allSorted: Ember.computed.sort('notes', 'sortProperties'),
+  init: function() {
   },
   
-  noneInEditMode: function() {
-    console.log('none in edit..');
-    return this.setEach('isEditing', false);
-  }.property('@each.isEditing'),
-
   paneTitle: function() {
     return "Notes"
   }.property(),
@@ -32,6 +26,7 @@ SBD.NotesController = Ember.ArrayController.extend({
   }.property('@each.isCompleted')
   */
   actions: {
+    
     toggleNewForm: function(className) {
       console.log(className + "...class<<");
       var cText = $(className).text();
@@ -68,7 +63,8 @@ SBD.NotesController = Ember.ArrayController.extend({
         record.deleteRecord();
         record.save();
       });
-    }    
+    },
+    
   }
     
 });

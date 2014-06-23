@@ -1,8 +1,0 @@
-li = link-to 'notes' | << Back to notes from edit
-h2 
-  = if this.isEditing
-    h2 Editing Note ##{id}
-  = else
-    h2 Viewing Note ##{id}
-
-= partial "app/notes/form"

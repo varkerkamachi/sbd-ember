@@ -1,0 +1,24 @@
+li = link-to 'notes' < cancel
+
+p click=toggleEdit Editing: #{this.isEditing}
+= if this.isEditing
+  h4 Editing Note ##{model.id}
+  form
+    p
+      Ember.TextField valueBinding="model.name"
+      p
+        | Preview:
+        %br
+        =model.name
+    p
+      Ember.TextArea valueBinding="model.note"
+      p 
+        | preview:
+        %br
+        =model.note
+    p
+      button click=updateNote Update
+
+= else
+  h4 = model.name
+  p = model.note

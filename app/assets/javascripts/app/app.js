@@ -15,12 +15,25 @@ SBD.Router.map(function() {
   this.resource('remote', { path: 'remotes/:remote_id' });
 
   this.resource('notes', function(){
-    this.route('new');
-    this.route('edit', { path: ':note_id/edit' });
+    this.resource('note', { path: '/:note_id' }, function() {
+      this.route('edit');
+    });
+    this.route('create');
   });
-  // this is so we can use a template that doesn't inherit from "notes"
-  this.resource('note', { path: 'notes/:note_id' });
+  this.route('missing', { path: '/*path'});
+  // this.resource('notes', function(){
+  //   this.route('new');
+  //   this.route('edit', { path: ':note_id/edit' });
+  // });
+  // // this is so we can use a template that doesn't inherit from "notes"
+  // this.resource('note', { path: 'notes/:note_id' });
 });
+
+SBD.MissingRoute = Ember.Route.extend({
+  redirect: function() {
+    this.transitionTo('remotes.index');
+  }
+})
 
 /* Store and models */
 SBD.ApplicationAdapter = DS.RESTAdapter.extend();
@@ -72,12 +85,11 @@ SBD.NotesRoute = Ember.Route.extend({
   }
 });
 
-SBD.NoteRoute = Ember.Route.extend({
-  model: function(params) {
-    return this.store.find('note', params.note_id);
-  },
-  setupController: function(controller, model) {
-    controller.set('note', model);
+SBD.NoteIndexRoute = Ember.Route.extend({
+  controllerName: 'note.index',
+  renderTemplate: function(note) {
+    this.controller.set('isEditing', false);
+    this.render('app/notes/note/index');
   }
 });
 
@@ -86,12 +98,12 @@ SBD.NotesNewRoute = Ember.Route.extend({
     this.render({ outlet: 'modelForm' });
   }
 });
-
-SBD.NotesEditRoute = Ember.Route.extend({
-  model: function(params) {
-    return this.store.find('note', params.note_id);
+//this probably isn't needed...
+SBD.NoteEditRoute = Ember.Route.extend({
+  controllerName: 'note.index',
+  renderTemplate: function(note) {
+    this.get('controller').send('toggleEditTo', 'true');
+    this.render('app/notes/note/index');
   },
-  renderTemplate: function() {
-    this.render({ outlet: 'modelForm' });
-  }
+
 });

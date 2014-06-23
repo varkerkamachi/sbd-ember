@@ -1,9 +1,8 @@
-li.data_row click="editNote note"
-  = link-to 'note' note
-    | {{note.name}}
-
+li.data_row
+  = link-to 'note.index' note | #{note.name}
+  
   a.right click="deleteNote note"
-    '  delete &nbsp;
-  = link-to 'note' note click="editNote note" class="right"
-    ' edit
-
+    | &nbsp;&nbsp;
+      delete &nbsp;
+  = link-to 'note.edit' note class="right"
+    ' edit 

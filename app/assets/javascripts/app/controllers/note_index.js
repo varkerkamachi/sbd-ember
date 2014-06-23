@@ -1,9 +1,9 @@
-SBD.NoteController = Ember.Controller.extend({
+SBD.NoteIndexController = Ember.ObjectController.extend({
   isEditing: false,  
   actions: {
-    updateNote: function(note) {
+    updateNote: function(model) {
       //identify record to update
-      var note = this.get('note');
+      var note = this.get('model');
       //grab new values
       var noteName = note.get('name');
       var noteNote = note.get('note');
@@ -13,16 +13,16 @@ SBD.NoteController = Ember.Controller.extend({
       //save
       note.save();
       //reset editing property to false
-      this.toggleProperty('isEditing');
+      this.send('toggleEdit');
       //bounce back to index
       this.transitionToRoute('notes');
+      //this.view.reset();
     },
-    editNote: function(note) {
-      console.log('controller: ' + this.get('controller'));
-      
+    toggleEdit: function() {
       this.toggleProperty('isEditing');
-      // this.transitionToRoute('note/:note_id');
     },
-    
+    toggleEditTo: function(input) {
+      this.set('isEditing', input);
+    }    
   }
 });

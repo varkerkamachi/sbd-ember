@@ -5,10 +5,9 @@
 
     button click="toggleNewForm '.new_form_button'" class='new_form_button' Add New
       
-  .pane_content
+  .pane_content#paney
     = yield
 
     .new_form_wrapper
-      / = outlet modelForm
       = partial 'app/notes/form'
 
