@@ -1,0 +1,8 @@
+li class="data_row"
+  = link-to model.name showActionUrl model
+  /a.right.delete_icon click=onDeleteClick
+  a.right.icon.delete_icon click=prepareToDelete
+  if deleteDialog
+    = partial 'app/layout/delete_confirmation'
+  = link-to "edit" editActionUrl model class="right icon edit_icon"
+  

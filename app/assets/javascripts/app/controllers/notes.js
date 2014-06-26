@@ -7,44 +7,41 @@ SBD.NotesController = Ember.ArrayController.extend({
   sortProperties: ['updated_at:desc', 'name:asc'],
   //sortAscending: true,
   allSorted: Ember.computed.sort('notes', 'sortProperties'),
-  init: function() {
-  },
-  
+  buttonText: 'Add New',
+  isActive: false,
+  formWrapperClass: 'new_form_wrapper',
+  errors: false,
+
   paneTitle: function() {
     return "Notes"
   }.property(),
 
-  /*
-  allAreDone: function(key, value) {
-    if (value === undefined) {
-      return !!this.get('length') && this.everyProperty('isCompleted', true);
-    } else {
-      this.setEach('isCompleted', value);
-      this.invoke('save');
-      return value;
-    }
-  }.property('@each.isCompleted')
-  */
   actions: {
-    
-    toggleNewForm: function(className) {
-      console.log(className + "...class<<");
-      var cText = $(className).text();
-      console.log('ctext: ' + cText);
-      var f = this.send('swapButtonText', className, cText);
-      $('.new_form_wrapper').animate({
-        visibility: "toggle",
-      }, 350, function() { f; });
-    },
-    
-    swapButtonText: function(el, text) {
-      $(el).text(text == 'Add New' ? 'Cancel' : 'Add New');
+    setActive: Ember.computed(this.isActive, function() {
+      return this.isActive == true ? false : true;
+    }),
+
+    toggleText: function() {
+      // console.log('active/' + this.isActive);
+      this.toggleProperty('isActive');
+      console.log('notes toggle - active/' + this.isActive);
+
+      this.send('toggleNewForm');
+      if( this.isActive == true ) {
+        this.set('buttonText', 'Close');
+      }
+      else {
+        this.set('buttonText', 'Add New');
+      }
     },
     
     createNote: function() {
       var name = this.get('name');
       var note = this.get('note');
       // if(!name.trim()) { return; }
+
+      //if(this.send('validateForm', this.name, this.note)) {
+      //},
       var noteObj = this.store.createRecord('note', {
           name: name,
           note: note
@@ -53,10 +50,42 @@ SBD.NotesController = Ember.ArrayController.extend({
       this.set('note', '');
         
       noteObj.save();
-      this.send('toggleNewForm');
+      //console.log('form vis: ' + this.formIsVisible)
+      this.send('toggleText');
       this.transitionToRoute('notes');
     },
+
+
+
+    toggleNewForm: function() {
+      $('.' + this.formWrapperClass + '').animate({
+        visibility: "toggle",
+      }, 75);
+    },
     
+    validateForm: function(name, note) {
+      console.log('validating...' + typeof name);
+      var valid = true,
+          message = 'There was an error ';
+      if(typeof name == 'undefined') {
+        valid = false;
+        this.toggleProperty('errors');
+        message += ' - the name must be longer than 4 characters. FIX IT!!!';
+        return false;
+      }
+      else if(typeof note == 'undefined') {
+        valid = false;
+        this.toggleProperty('errors');
+        message += ' - the note must be longer than 4 characters. FIX IT!!!';
+        return false;
+      }
+      else {
+        return true;
+        message = "No errors - successfully created!"
+      }
+      return message;
+    },
+
     deleteNote: function(note) {
       // passed by action from view to controller...if not here then it looks in Route
       this.get('store').find('note', note.id).then(function(record){

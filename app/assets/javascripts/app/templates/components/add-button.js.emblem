@@ -1,0 +1,2 @@
+button class="new_form_button" click="toggleText"
+  = buttonText

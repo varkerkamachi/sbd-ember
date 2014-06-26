@@ -3,6 +3,17 @@ SBD = Ember.Application.create({
   LOG_TRANSITIONS: true
 });
 
+/* special components */
+SBD.FormController = Ember.ObjectController.extend({
+
+  toggleNewForm: function(className) {
+    console.log('haha!!' + className);
+    // $('.' + this.formWrapperClass + '').animate({
+    //   visibility: "toggle",
+    // }, 75);
+  },
+  
+});
 /* Router */
 SBD.Router = Ember.Router.extend();
 SBD.Router.map(function() {
@@ -21,12 +32,6 @@ SBD.Router.map(function() {
     this.route('create');
   });
   this.route('missing', { path: '/*path'});
-  // this.resource('notes', function(){
-  //   this.route('new');
-  //   this.route('edit', { path: ':note_id/edit' });
-  // });
-  // // this is so we can use a template that doesn't inherit from "notes"
-  // this.resource('note', { path: 'notes/:note_id' });
 });
 
 SBD.MissingRoute = Ember.Route.extend({
@@ -93,12 +98,6 @@ SBD.NoteIndexRoute = Ember.Route.extend({
   }
 });
 
-SBD.NotesNewRoute = Ember.Route.extend({
-  renderTemplate: function() {
-    this.render({ outlet: 'modelForm' });
-  }
-});
-//this probably isn't needed...
 SBD.NoteEditRoute = Ember.Route.extend({
   controllerName: 'note.index',
   renderTemplate: function(note) {

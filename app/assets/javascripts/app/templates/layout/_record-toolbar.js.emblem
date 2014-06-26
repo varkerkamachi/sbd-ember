@@ -1,0 +1,9 @@
+.toolbar.clearfix
+  .left
+    = link-to 'notes' class='cancel_icon'
+      cancel
+  .right
+    = if this.isEditing
+      '
+    = else
+      a.edit_icon title="click to edit" click=toggleEdit edit

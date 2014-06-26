@@ -97,13 +97,62 @@ $ivory: #f4f3ef;
   -moz-border-radius:$top $right $bottom $left;
   -webkit-border-radius:$top $right $bottom $left;
 }
-@mixin box_shadowed($x, $y, $blur, $color) {
-  box-shadow:$x $y $blur $color;
-  -moz-box-shadow:$x $y $blur $color;
-  -webkit-box-shadow:$x $y $blur $color;
+@mixin box_shadowed($x, $y, $blur, $size, $color) {
+  box-shadow:$x $y $blur $size $color;
+  -moz-box-shadow:$x $y $blur $size $color;
+  -webkit-box-shadow:$x $y $blur $size $color;
 }
 @mixin text_shadow($x, $y, $blur, $color) {
   text-shadow:$x $y $blur $color;
+}
+@mixin padded($top, $right, $bottom:$top, $left:$right) {
+  padding: $top $right $bottom $left;
+}
+
+@mixin icon($action, $file_type) {
+  @include rounded(5px, 5px);
+  display: block;
+  width: 22px;
+  line-height: 22px;
+  height: 22px;
+  padding: 1px;
+  margin: auto 2px;
+  text-indent: -9999em;
+  border: 1px solid $mid-gray;
+  text-align: center;
+  background: #ffffff url(#{asset_path('icon_' + $action + '.' + $file_type)}) no-repeat center center;
+  background-size: 70% 70%;
+  opacity: .45;
+}
+
+@mixin icon_hover {
+  border-color: $lp-gray;
+  opacity: .75;
+  @include box_shadowed(0, 0, 4px, 0px, $mid-gray); 
+}
+
+@mixin side_flip {
+  transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+@mixin button {
+  @include rounded(3px, 3px);
+  @include padded(7px, 18px, 8px);
+  border: 0;
+  background: $light-blue;
+  @include text_shadow(0, 1px, 0, $ivory);
+  @include box_shadowed(0, 0, 1px, 0px, $dark-blue);
+  line-height: 115%;
+  color: $dark-blue;
+  font-size: 0.84em;
+  transition: all 0.3s linear;
+}
+
+@mixin button_hover {
+  background: lighten($light-blue, 8%);
+  @include box_shadowed(0, 0, 3px, 0px, $dark-blue);
 }
 
 /*** ===================== 
@@ -194,6 +243,49 @@ body {
   display: block;
   clear: both;
   zoom: 1;
+}
+
+
+/*** ===================== 
+  ADD FLEXIBLE TEXT STYLES
+===================== ***/
+.label {
+  font: normal 0.95em/1.15em sans-serif;
+  font-family: "Arial", "Geneva", sans-serif;
+}
+.paragraph_text {
+  line-height: 125%;
+}
+.accented {
+  font-style: italic;
+}
+.preview {
+  @extend .label;
+  font-size: 0.82em;
+  line-height: 0.9em;
+  color: $light-blue;
+}
+
+.preview_label {
+  @extend .preview;
+  font-weight: 700;
+  color: $light-border-gray;
+}
+
+/*** ===================== 
+  ADD FLEXIBLE PADDING
+===================== ***/
+.padded_5 {
+  @include padded(5px, 5px);
+}
+.padded_10 {
+  @include padded(10px, 10px);
+}
+.padded_15 {
+  @include padded(15px, 15px);
+}
+.padded_20 {
+  @include padded(20px, 20px);
 }
 
 /*** ===================== 
@@ -301,8 +393,38 @@ body {
 
 
 /*** ===================== 
+  ICONS
+===================== ***/
+
+.confirm_icon {
+  @include icon("confirm", "jpg");
+}
+
+.icon:hover {
+  @include icon_hover;
+}
+
+.cancel_icon {
+  @include icon("cancel", "jpg");
+}
+
+.delete_icon {
+  @include icon("delete", "jpg");
+}
+
+.edit_icon {
+  @include icon("edit", "jpg");
+}
+
+
+/*** ===================== 
   CONTENT PANES
 ===================== ***/
+.resizable {
+  overflow: hidden;
+  resize: both;
+}
+
 .title_bar {
     position:relative;
     text-align: left;
@@ -315,7 +437,7 @@ body {
   margin: 0 auto 10px;
   padding-bottom: 3px;
   // @include rounded(3px, 3px);
-  @include box_shadowed(0, 0, 4px, $mid-gray);
+  @include box_shadowed(0, 0, 4px, 0px, $mid-gray);
   min-height: 25%;
   height: 100%;
   width: 80%;
@@ -324,9 +446,11 @@ body {
   .title_bar {
     @extend .title_bar;    
     .new_form_button {
+      @include button;
       position:absolute;
       top:5px;
       right:6px;
+      font-size: 0.65em;
       @include rounded(2px, 2px);
       padding:5px;
       text-align:center;
@@ -356,6 +480,7 @@ body {
     min-height: 300px;
     
     .data_row {
+      position:relative;
       padding: 10px 8px 9px;
       font-size: 15px;
       color: $warm-brown;
@@ -380,7 +505,7 @@ body {
   margin: 10px 20px 15px;
   background: #ffffff;
   border: 4px solid $ivory;
-  @include box_shadowed(0, 0, 1px, 0 $dark-blue);
+  @include box_shadowed(0, 0, 1px, 0, $dark-blue);
   @include rounded(3px, 3px);
 
   .title_bar {
@@ -395,21 +520,148 @@ body {
     color: $dark-blue;
   }
 }
+
+/*** ===================== 
+  EDIT/SHOW VIEW
+===================== ***/
+.layout_cell.flipping {
+  position: relative;
+  perspective: 800;
+  -webkit-perspective: 800;
+}
+.record_flip {
+  transition: all 0.25s ease-in-out;
+  transform-style: preserve-3d;
+  position: relative;
+  height: 95%;
+  width: 95%;
+  margin: 2.5%;
+
+  .face {
+    width: 98%;
+    height: 300px;
+    position: absolute;
+    border-radius: 4px;
+    border: 5px solid $ivory;
+  }
+
+  .front,
+  .back {
+    box-shadow: 0 0 6px $mid-gray;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .front {
+    z-index: 2;
+    background: #ffffff;
+  }
+
+  .back {
+    background-color: $pale-gray;
+    @include side_flip;
+  }
+}
+
+.record_flip.editing {
+  @include side_flip;
+}
+
+.view_title {
+  line-height: 145%;
+  @include text-shadow(0, 1px, 0, $ivory);
+}
+
+.edit_label {
+  @extend .label;
+  font-size: 0.82em;
+  margin-top: 1.3em;
+  line-height: 1em;
+  color: $cool-green;
+  text-transform: uppercase;
+}
+
+.edit_button {
+  @include button;
+}
+.edit_button:hover {
+  @include button_hover;
+}
+/*
+
+PALETTE
+$pale-blue: #e3f4fc;
+$light-blue: #86c2de;
+$light-border-gray: #c5c7c8;
+$pale-gray: #e9ebeb;
+$lp-gray: #cacacb;
+$mid-gray: #666b6d;
+$dark-blue: #0c2b39;
+$warm-brown: #675e5a;
+$orange: #fa7335;
+$cool-green: #0d9f6e;
+$green-gray: #8DB2A6;
+$text: #0F2B4F;
+$ivory: #f4f3ef;
+
+*/
+
+/*** ===================== 
+  EDIT/SHOW TOOLBAR
+===================== ***/
+.toolbar {
+  border-bottom: 1px solid #c8d2d4;
+  margin-bottom: 0.15em;
+  padding: 5px 10px 8px;
+  background: $ivory;
+}
+
+
+/*** ===================== 
+  DELETE MODAL CONFIRMATION
+===================== ***/
+.delete_wrapper {
+  position: absolute;
+  top: 40px;
+  right: -15px;
+  z-index: 3;
+  background: $pale-gray;
+  @include rounded(2px, 2px);
+  @include box_shadowed(0, 0, 10px, 2px, $dark-blue);
+  width: 75px;
+  height: 25px;
+  @include padded(4px, 2px);
+
+  .point {
+    position: absolute;
+    top: -20px;
+    left: 40%;
+    width: 0px;
+    height: 1px;
+    background: transparent;
+    border: 10px solid transparent;
+    border-bottom-color: $pale-gray;
+    &:after {
+      @include box_shadowed(0, -2px, 2px, 0px, $dark-blue);
+    }
+  }
+}
+
 /*** ===================== 
   NEW FORM
 ===================== ***/
 
 .new_form_wrapper {
   position: absolute;
-  top: -2px;
-  right: -5px;
+  top: 44px;
+  right: 1px;
   padding: 5px 20px 10px;
   display: none;
-  @include box_shadowed(-1px, 1px, 4px, $mid-gray);
+  @include box_shadowed(-1px, 1px, 4px, 0px, $mid-gray);
   @include rounded(0, 0, 0, 4px);
   background: $light-blue;
   z-index: 2;
-  width: 35%;
+  width: 55%;
 }
 
 form {
@@ -417,22 +669,44 @@ form {
   input[type='password'],
   textarea {
     @include rounded(4px, 4px);
-    padding: 6px 8px;
+    padding: 9px 12px;
+    line-height: 115%;
     border: 0;
-    box-shadow: 0 1px 1px $lp-gray,
-                0 -1px 2px $lp-gray;
+    box-shadow: inset 0 1px 1px $lp-gray,
+                inset 0 -1px 2px $lp-gray;
+    &:focus
+    &.focus {
+      box-shadow-color: $pale-blue;
+    }
   }
   select {
     padding: 6px 8px;
     border: 0;    
+  }
+  .full_width {
+    width: 90%;
+  }
+}
+
+.new_form_wrapper {
+  textarea {
+    height: 4.5em;
   }
 }
 
 label {
   padding-right: 2%;
   text-align: right;
-  font-size: 0.85em;
-  @include text_shadow(0, 1px, 0, $light-blue);  
+  font-size: 0.72em;
+  @include text_shadow(0, 1px, 0, $ivory);  
+}
+
+.save_button {
+  @include button;
+  background: $ivory;
+}
+.save_button:hover {
+  @include button_hover;
 }
 
 .preview_text {
@@ -445,6 +719,7 @@ label {
   .content_table_row {
     padding: 4px 0;
     margin-bottom: 8px;
+    clear: both;
   }
 
   .content_table_row:before,
@@ -455,7 +730,7 @@ label {
   .content_table_cell {
     display: block;
     padding: 0;
-    margin-left: 21%;
+    margin-left: 23%;
     line-height: 1.4em;
     min-height: 26px;
     text-align: left;
@@ -464,9 +739,9 @@ label {
       @extend label;
       float: left;
       margin-left: 0;
-      width: 18%;
-      max-width: 18%;
-      color: $dark-blue;
+      width: 20%;
+      max-width: 20%;
+      color: lighten($dark-blue, 10%);
     }
   }
 
@@ -479,6 +754,9 @@ label {
 
 }
 
+.error {
+  border: 1px solid red;
+}
 
 
 

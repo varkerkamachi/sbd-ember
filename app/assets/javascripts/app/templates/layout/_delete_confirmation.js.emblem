@@ -1,0 +1,6 @@
+.delete_wrapper.clearfix
+  .point
+  .left
+    .cancel_icon.icon title="Stop! Don't delete this!" click=cancelDelete
+  .right
+    .confirm_icon.icon title="Yes, delete it!" click=onDeleteClick

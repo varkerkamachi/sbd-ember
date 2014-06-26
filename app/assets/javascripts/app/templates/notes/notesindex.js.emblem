@@ -2,12 +2,15 @@
   div.title_bar
     .pane_title
       h4=paneTitle
+      = view SBD.CreateFormView
+        =view SBD.FlexView class="new_form_wrapper"
+          = partial 'app/notes/form'
 
-    button click="toggleNewForm '.new_form_button'" class='new_form_button' Add New
       
-  .pane_content#paney
+  .pane_content
     = yield
 
-    .new_form_wrapper
-      = partial 'app/notes/form'
+    /.new_form_wrapper
+    /=view SBD.FlexView class="new_form_wrapper"
+    /  = partial 'app/notes/form'
 

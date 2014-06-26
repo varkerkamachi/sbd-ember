@@ -1,24 +1,35 @@
-li = link-to 'notes' < cancel
-
-p click=toggleEdit Editing: #{this.isEditing}
-= if this.isEditing
-  h4 Editing Note ##{model.id}
-  form
-    p
-      Ember.TextField valueBinding="model.name"
-      p
-        | Preview:
+.record_flip{{bind-attr class="isEditing:editing"}}
+  = if this.isEditing
+    .front.face
+      '
+    .back.face
+      = partial 'app/layout/_record-toolbar'
+      .padded_15
+        h3.view_title Editing Note ##{model.id}
         %br
-        =model.name
-    p
-      Ember.TextArea valueBinding="model.note"
-      p 
-        | preview:
-        %br
-        =model.note
-    p
-      button click=updateNote Update
+        form
+          .content_table
+            .content_table_row
+              Ember.TextField valueBinding="model.name" class="full_width" autofocus="true" autofocus="autofocus" tabindex="1"
+            .content_table_row
+              Ember.TextArea valueBinding="model.note" class="full_width"
+            .content_table_row.preview.accented 
+              /%strong
+              /  ' preview:
+              /= model.note
+            .content_table_row
+              button class="edit_button right" click=updateNote Update
 
-= else
-  h4 = model.name
-  p = model.note
+  = else
+    .back.face
+      '
+    .front.face
+      = partial 'app/layout/_record-toolbar'
+      .padded_15
+        h3.view_title Note
+        
+        p.edit_label.accented name
+        h5 = model.name
+        
+        p.edit_label.accented note
+        p.paragraph_text = model.note

@@ -23,6 +23,7 @@ SBD.NoteIndexController = Ember.ObjectController.extend({
     },
     toggleEditTo: function(input) {
       this.set('isEditing', input);
-    }    
+    },
+        
   }
 });

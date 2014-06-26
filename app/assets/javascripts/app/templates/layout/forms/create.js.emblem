@@ -1,0 +1,3 @@
+button class="new_form_button" click="this.toggleText"
+  = this.buttonText
+= yield

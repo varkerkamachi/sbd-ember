@@ -1,10 +1,9 @@
 .aab
-  .layout_cell
+  .layout_cell.flipping
     = outlet
-    = outlet modelForm
 
   .layout_cell
     ul.results_list
       each note in allSorted
-        = partial "app/notes/pane_data_item"
+        = panedata-listitem model=note showActionUrl="note.index" editActionUrl="note.edit" action="deleteNote"
 
