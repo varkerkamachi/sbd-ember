@@ -39,8 +39,8 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;
+html {
+  font-size: 72.5%;
 }
 ol, ul {
 	list-style: none;
@@ -63,13 +63,8 @@ a:visited,
 a:hover,
 a:active { text-decoration: none; }
 
-h1 { font-size: 2.65em; }
-h2 { font-size: 2.22em; }
-h3 { font-size: 1.48em; }
-h4 { font-size: 1.19em; }
-h5 { font-size: 1.18em; }
-h6 { font-size: 0.94em; }
 
+.devmode { border: 2px solid orange; }
 
 /*** ===================== 
   PALETTE
@@ -88,6 +83,8 @@ $green-gray: #8DB2A6;
 $text: #0F2B4F;
 $ivory: #f4f3ef;
 
+$default-font-size: 15px;
+$default-font-size_rems: 1.5rem;
 
 /*** ===================== 
   MIXINS
@@ -111,10 +108,10 @@ $ivory: #f4f3ef;
 
 @mixin icon($action, $file_type) {
   @include rounded(5px, 5px);
-  display: block;
-  width: 22px;
+  display: inline-block;
+  width: 21px;
   line-height: 22px;
-  height: 22px;
+  height: 21px;
   padding: 1px;
   margin: auto 2px;
   text-indent: -9999em;
@@ -146,13 +143,39 @@ $ivory: #f4f3ef;
   @include box_shadowed(0, 0, 1px, 0px, $dark-blue);
   line-height: 115%;
   color: $dark-blue;
-  font-size: 0.84em;
+  @include font_size_for(16px);
   transition: all 0.3s linear;
 }
 
 @mixin button_hover {
   background: lighten($light-blue, 8%);
   @include box_shadowed(0, 0, 3px, 0px, $dark-blue);
+}
+
+/* for responsive font-sizing in ems for different screens */
+/* for responsive font-sizing in ems for different screens */
+@mixin font_size_for($target, $context:$default-font-size) {
+  font-size: $target/$context + em; 
+}
+
+@mixin flex_row {
+  position: relative;
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;  
+  -ms-flex-direction: row;
+}
+
+@mixin flex_col {
+  position: relative;
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;  
+  -ms-flex-direction: column;
 }
 
 /*** ===================== 
@@ -185,10 +208,15 @@ html, body > .ember-view {
 body {
   background: url(#{asset_path('178589874-1.jpg')}) no-repeat center center fixed;
   background-size: cover;
-  font: normal 0.985em/1.295em "verdana" ,"arial", "helvetica", sans-serif;
+  font-family: "Verdana" ,"Arial", "Helvetica", sans-serif;
+  font-weight: normal;
+  line-height: 125%;
   height: 100%;
   color: $text;
 }
+
+
+
 .layout_cell {
   float: left;
   height: auto;
@@ -218,11 +246,10 @@ body {
   width: inherit;
   margin: 0;
 }
-
   
 .logo {
   letter-spacing: 2px;
-  font-size: 20px;
+  @include font_size_for(24px);
   .logo_text {
     color: $cool-green;//$light-blue;
   }
@@ -246,11 +273,19 @@ body {
 }
 
 
+h1 { @include font_size_for(32px); }
+h2 { @include font_size_for(27px); }
+h3 { @include font_size_for(24px); }
+h4 { @include font_size_for(20px); }
+h5 { @include font_size_for(18px); }
+h6 { @include font_size_for(16px); }
+
+
 /*** ===================== 
   ADD FLEXIBLE TEXT STYLES
 ===================== ***/
 .label {
-  font: normal 0.95em/1.15em sans-serif;
+  @include font_size_for(13px);
   font-family: "Arial", "Geneva", sans-serif;
 }
 .paragraph_text {
@@ -261,7 +296,7 @@ body {
 }
 .preview {
   @extend .label;
-  font-size: 0.82em;
+  @include font_size_for(9px);
   line-height: 0.9em;
   color: $light-blue;
 }
@@ -312,7 +347,7 @@ body {
         transition: color linear 0.32s;
         &.nav-link {
           display: block;
-          font-size: 0.87em;
+          @include font_size_for(17.5px);
 
           &:hover {
             color: $green-gray;
@@ -361,7 +396,7 @@ body {
         }
         &.user_address {
           float: right;
-          font-size: 12px;
+          @include font_size_for(14px);
         }
       }
     }
@@ -372,7 +407,7 @@ body {
   position: absolute;
   right: 15px;
   bottom: 55px;
-  font-size: xx-small;
+  @include font_size_for(8px);
   color: black;
 }
 
@@ -421,8 +456,17 @@ body {
   CONTENT PANES
 ===================== ***/
 .resizable {
-  overflow: hidden;
+  overflow: auto;
   resize: both;
+}
+
+.hresizable {
+  overflow: auto;
+  resize: horizontal;
+}
+.vresizable {
+  overflow: auto;
+  resize: vertical;
 }
 
 .title_bar {
@@ -434,23 +478,23 @@ body {
 
 .pane {
   position: relative;
-  margin: 0 auto 10px;
+  margin: 0 auto 20px;
   padding-bottom: 3px;
   // @include rounded(3px, 3px);
   @include box_shadowed(0, 0, 4px, 0px, $mid-gray);
   min-height: 25%;
   height: 100%;
-  width: 80%;
+  width: 75%;
   background: rgba(255,255,255,.85);
 
   .title_bar {
     @extend .title_bar;    
     .new_form_button {
       @include button;
+      @include font_size_for(12px);
       position:absolute;
-      top:5px;
+      top: 2px;
       right:6px;
-      font-size: 0.65em;
       @include rounded(2px, 2px);
       padding:5px;
       text-align:center;
@@ -465,7 +509,7 @@ body {
     }
     .pane_title {
       @include text_shadow(0, 0, 2px, $dark-blue);
-      font-size: 20px;
+      @include font_size_for(20px);
       color: $pale-blue;
       line-height: 1.65em;
       
@@ -482,7 +526,7 @@ body {
     .data_row {
       position:relative;
       padding: 10px 8px 9px;
-      font-size: 15px;
+      @include font_size_for(17px);
       color: $warm-brown;
       border-bottom: 1px solid $pale-gray;
       -webkit-transition: background linear .25s;
@@ -516,7 +560,7 @@ body {
 
   .content {
     padding: 20px;
-    font-size: 0.78em;
+    @include font_size_for(12px);
     color: $dark-blue;
   }
 }
@@ -574,7 +618,6 @@ body {
 
 .edit_label {
   @extend .label;
-  font-size: 0.82em;
   margin-top: 1.3em;
   line-height: 1em;
   color: $cool-green;
@@ -653,7 +696,7 @@ $ivory: #f4f3ef;
 
 .new_form_wrapper {
   position: absolute;
-  top: 44px;
+  top: 36px;
   right: 1px;
   padding: 5px 20px 10px;
   display: none;
@@ -697,7 +740,7 @@ form {
 label {
   padding-right: 2%;
   text-align: right;
-  font-size: 0.72em;
+  @include font_size_for(13px);
   @include text_shadow(0, 1px, 0, $ivory);  
 }
 
@@ -757,6 +800,170 @@ label {
 .error {
   border: 1px solid red;
 }
+
+
+/*** ===================== 
+  DASHBOARD
+===================== ***/
+.dashboard_wrapper {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.flow_wrapper {
+  border: 3px solid $cool-green;
+  background-opacity: 0.4;
+  background: $light-blue;
+}
+
+/* flex cells ... */
+.flex_containers {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  // width: 100%;
+
+  &.rows {
+    @include flex_row;
+  }
+  &.cols {
+    @include flex_col;
+  }
+
+  .flex_cells {
+    position: relative;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    transition: width 0.25s ease-out;
+    -webkit-transition: width 0.25s ease-out;
+    -moz-transition: width 0.25s ease-out;
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+/* flex widths ... */
+
+.x25 {
+  width: 24.75%;
+}
+.x33 {
+  width: 33.25%;
+}
+.x50 {
+  width: 49.85%;
+}
+.x75 {
+  width: 74.75%;
+}
+.x {
+  width: 99.99%;
+}
+
+/* flex heights ... */
+
+.y20 {
+  height: 19.975%;
+}
+
+.y25 {
+  height: 24.75%;
+}
+.y33 {
+  height: 33.25%;
+}
+.y50 {
+  height: 49.85%;
+}
+.y75 {
+  height: 74.75%;
+}
+.y {
+  height: 99.99%;
+}
+
+.resize_handler {
+  position: absolute;
+  padding: 1px;
+  background: black;
+  font-size: 0.1em;
+}
+
+.hresize_handler {
+  @extend .resize_handler;
+  width: 5px;
+  height: 100%;
+  top: 0;
+  right: -2px;
+  cursor: e-resize;
+}
+.vresize_handler {
+  @extend .resize_handler;
+  width: 100%;
+  height: 5px;
+  left: 0;
+  bottom: 0;
+  cursor: s-resize;
+}
+
+/*
+PALETTE
+$pale-blue: #e3f4fc;
+$light-blue: #86c2de;
+$light-border-gray: #c5c7c8;
+$pale-gray: #e9ebeb;
+$lp-gray: #cacacb;
+$mid-gray: #666b6d;
+$dark-blue: #0c2b39;
+$warm-brown: #675e5a;
+$orange: #fa7335;
+$cool-green: #0d9f6e;
+$green-gray: #8DB2A6;
+$text: #0F2B4F;
+$ivory: #f4f3ef;
+*/
+
+.cols .header {
+  @include padded(10px, 8px);
+  @include font_size_for(12px);
+  top: 0;
+  left: 0;
+  background: $cool-green;
+  opacity: 0.8;
+  color: $warm-brown;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

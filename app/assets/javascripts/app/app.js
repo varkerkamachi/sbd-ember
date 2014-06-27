@@ -4,20 +4,22 @@ SBD = Ember.Application.create({
 });
 
 /* special components */
-SBD.FormController = Ember.ObjectController.extend({
+// SBD.FormController = Ember.ObjectController.extend({
 
-  toggleNewForm: function(className) {
-    console.log('haha!!' + className);
-    // $('.' + this.formWrapperClass + '').animate({
-    //   visibility: "toggle",
-    // }, 75);
-  },
+//   toggleNewForm: function(className) {
+//     console.log('haha!!' + className);
+//     // $('.' + this.formWrapperClass + '').animate({
+//     //   visibility: "toggle",
+//     // }, 75);
+//   },
   
-});
+// });
 /* Router */
 SBD.Router = Ember.Router.extend();
 SBD.Router.map(function() {
   this.route('about', { path: '/about' });
+
+  this.route('dashboard', { path: '/sbd-dash'});
 
   this.resource('remotes', function() {
     this.route('new');
@@ -43,13 +45,7 @@ SBD.MissingRoute = Ember.Route.extend({
 /* Store and models */
 SBD.ApplicationAdapter = DS.RESTAdapter.extend();
 
-
 /* routes */
-SBD.AboutRoute = Ember.Route.extend({
-  setupController: function(controller, model) {
-    controller.set('about', "model");
-  }
-});
 SBD.RemotesRoute = Ember.Route.extend({
   model: function() {
     return this.store.findAll('remote');
@@ -106,3 +102,15 @@ SBD.NoteEditRoute = Ember.Route.extend({
   },
 
 });
+
+SBD.DashboardRoute = Ember.Route.extend({
+  controllerName: 'dashboard',
+  renderTemplate: function() {
+    this.render('app/dashboard/index');
+  },
+  renderView: function() {
+    this.render('app/dashboard/index');
+  }
+});
+
+

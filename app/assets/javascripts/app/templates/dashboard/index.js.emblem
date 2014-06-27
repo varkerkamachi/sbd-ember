@@ -1,0 +1,26 @@
+= view SBD.DashboardIndexView
+  .flex_containers.rows.hresizable.devmode.y20.x
+    .flex_cells.x20.flow_wrapper.y.left.resizable
+      .page_title
+        h2 Dashboard index
+    .flex_cells.x75.flow_wrapper.y.left
+      .page_title
+        h4 Other things over here
+
+
+  .dashboard_wrapper.clearfix.devmode.flex_containers.rows
+    .flex_cells.x25.resizable.flow_wrapper.y50.left
+      /.hresize_handler
+      .header Notes
+      = view SBD.FlexView
+        = render 'notes'
+    .flex_cells.x50.resizable.flow_wrapper.y75.left
+      /.hresize_handler
+      .header Notes
+      = view SBD.FlexView
+        = render 'remotes'
+    .flex_cells.x25.resizable.flow_wrapper.y33.left
+      /.hresize_handler
+      .header Notes
+      = view SBD.FlexView
+        = render 'notes' note
