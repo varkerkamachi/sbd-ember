@@ -1,9 +1,9 @@
-.record_flip{{bind-attr class="isEditing:editing"}}
+.record_flip.clearfix{{bind-attr class="isEditing:editing"}}
   = if this.isEditing
     .front.face
       '
     .back.face
-      = partial 'app/layout/_record-toolbar'
+      = record-toolbar showActionUrl="notes" editAction="toggleEdit" editActionUrl="note.edit" isEditing=this.isEditing
       .padded_15
         h3.view_title Editing Note ##{model.id}
         %br
@@ -24,7 +24,7 @@
     .back.face
       '
     .front.face
-      = partial 'app/layout/_record-toolbar'
+      = record-toolbar showActionUrl="notes" editAction="toggleEdit" editActionUrl="note.edit" isEditing=this.isEditing
       .padded_15
         h3.view_title Note
         

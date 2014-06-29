@@ -1,22 +1,20 @@
-h2 Create a new remote
+h3 =this.formTitle
 form
-  p
-    Ember.TextField valueBinding="name"
-    p
-      | Preview:
-      %br
-      =name
-  p
-    Ember.TextField valueBinding="url"
-    p
-      | Preview:
-      %br
-      =url
-  p
-    Ember.TextArea valueBinding="note"
-    p 
-      | preview:
-      %br
-      =note
-  p
-    button click=createRemote Save
+  .content_table
+    .content_table_row
+      .content_table_cell.label Name or title
+      .content_table_cell
+        Ember.TextField valueBinding="name"
+    .content_table_row
+      .content_table_cell.label Url
+      .content_table_cell
+        Ember.TextField valueBinding="url"
+    .content_table_row
+      .content_table_cell.label Note
+      .content_table_cell
+        Ember.TextArea valueBinding="note"
+    .content_table_row
+      .content_table_cell.label
+      
+      .content_table_cell
+        button.save_button.right click="this.createRemote" Save

@@ -9,7 +9,7 @@ SBD.NotesController = Ember.ArrayController.extend({
   allSorted: Ember.computed.sort('notes', 'sortProperties'),
   buttonText: 'Add New',
   isActive: false,
-  formWrapperClass: 'new_form_wrapper',
+  formWrapperClass: 'note_new_form',
   errors: false,
 
   paneTitle: function() {

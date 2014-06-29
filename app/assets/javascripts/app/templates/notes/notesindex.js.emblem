@@ -3,14 +3,10 @@
     .pane_title
       h4=paneTitle
       = view SBD.CreateFormView
-        =view SBD.FlexView class="new_form_wrapper"
+        =view SBD.FlexView class="note_new_form new_form_wrapper hidden"
           = partial 'app/notes/form'
 
       
   .pane_content
     = yield
-
-    /.new_form_wrapper
-    /=view SBD.FlexView class="new_form_wrapper"
-    /  = partial 'app/notes/form'
 

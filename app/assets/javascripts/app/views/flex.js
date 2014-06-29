@@ -6,21 +6,21 @@ SBD.FlexView = Ember.View.extend({
   draggable: true,
   _resizeHandler: null,
 
-  init: function() {
-    this._super();
-    var view = this;
+  // init: function() {
+  //   this._super();
+  //   var view = this;
      
-    var resizeHandler = function() {
-      view.rerender();
-    };
+  //   var resizeHandler = function() {
+  //     view.rerender();
+  //   };
    
-    this.set('resizeHandler', resizeHandler);
-    $(window).bind('resize', this.get('resizeHandler'));
-  },
+  //   this.set('resizeHandler', resizeHandler);
+  //   $(window).bind('resize', this.get('resizeHandler'));
+  // },
    
-  willDestroy: function() {
-    $(window).unbind('resize', this.get('resizeHandler'));
-  }
+  // willDestroy: function() {
+  //   $(window).unbind('resize', this.get('resizeHandler'));
+  // }
 
 });
 

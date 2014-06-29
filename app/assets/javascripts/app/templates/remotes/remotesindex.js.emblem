@@ -2,13 +2,10 @@
   div.title_bar
     .pane_title
       h4=paneTitle
+      = view SBD.CreateFormView
+        =view SBD.FlexView class="remote_new_form new_form_wrapper hidden"
+          = partial 'app/remotes/form'
 
-    button click="toggleNewForm '.new_form_button'" class='new_form_button' Add New
       
-  .pane_content
-    = yield
-
-    .new_form_wrapper
-      / = outlet modelForm
-      = partial 'app/remotes/form'
+  = yield
 

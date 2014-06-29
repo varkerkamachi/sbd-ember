@@ -1,0 +1,38 @@
+.hover_pane.hidden.flipping.clearfix
+  .record_flip.clearfix{{bind-attr class="isEditing:editing"}}
+    = if this.isEditing
+      .front.face
+        '
+      .back.face
+        = record-toolbar showActionUrl="remotes" editAction="toggleEdit" editActionUrl="remote.edit" isEditing=this.isEditing
+        .padded_15
+          h3.view_title Editing Remote ##{model.id}
+          %br
+          form
+            .content_table
+              .content_table_row
+                Ember.TextField valueBinding="model.name" class="full_width" autofocus="true" autofocus="autofocus" tabindex="1"
+              .content_table_row
+                Ember.TextArea valueBinding="model.url" class="full_width"
+              .content_table_row
+                Ember.TextArea valueBinding="model.note" class="full_width"
+              .content_table_row
+                button class="edit_button right" click=updateRemote Update
+
+    = else
+      .back.face
+        '
+      .front.face
+        = record-toolbar showActionUrl="remotes" editAction="toggleEdit" editActionUrl="remote.edit" isEditing=this.isEditing
+        /= partial 'app/layout/_record-toolbar'
+        .padded_15
+          h3.view_title Remote
+          
+          p.edit_label.accented name
+          h5 = model.name
+          
+          p.edit_label.accented url
+          span.break.wrap = model.url
+
+          p.edit_label.accented note
+          p.paragraph_text = model.note

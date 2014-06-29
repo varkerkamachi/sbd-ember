@@ -1,8 +1,0 @@
-li = link-to 'remotes' | << Back to remotes from edit
-h2 
-  = if this.isEditing
-    h2 Editing Remote ##{id}
-  = else
-    h2 Viewing Remote ##{id}
-
-= partial "app/remotes/form"
