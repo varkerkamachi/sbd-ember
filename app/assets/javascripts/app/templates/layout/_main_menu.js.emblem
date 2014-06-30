@@ -1,9 +1,0 @@
-/ ul
-/   li.nav-link
-/     = link-to '' | Home
-/   li
-/     = link-to 'about' class='nav-link' | About
-/   li
-/     =link-to 'notes' class='nav-link' | Notes
-/   li
-/     =link-to 'remotes' class='nav-link' | Remotes
