@@ -1,9 +1,14 @@
-.aab
-  .layout_cell.flipping
+.flex_cells.y.x25.left.hresizable
+  .layout_pane.styled
+    .content_title
+      .inner_wrapper
+        ' Notes
+        .collapse_icon
+    .inner_wrapper
+      ul.results_list
+        each note in allSorted
+          = panedata-listitem model=note showActionUrl="note.index" editActionUrl="note.edit" action="deleteNote"
+.flex_cells.y.x25.left.hresizable
+  .flipping
     = outlet
-
-  .layout_cell
-    ul.results_list
-      each note in allSorted
-        = panedata-listitem model=note showActionUrl="note.index" editActionUrl="note.edit" action="deleteNote"
-
+  

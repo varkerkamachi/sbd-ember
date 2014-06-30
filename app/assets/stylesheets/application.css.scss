@@ -40,7 +40,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 html {
-  font-size: 72.5%;
+  font-size: 85%;
 }
 ol, ul {
 	list-style: none;
@@ -69,17 +69,26 @@ a:active { text-decoration: none; }
 /*** ===================== 
   PALETTE
 ===================== ***/
-$pale-blue: #e3f4fc;
-$light-blue: #86c2de;
 $light-border-gray: #c5c7c8;
 $pale-gray: #e9ebeb;
+$light-slate: #d9dada;
 $lp-gray: #cacacb;
 $mid-gray: #666b6d;
+
+$pale-blue: #e3f4fc;
+$light-blue: #86c2de;
 $dark-blue: #0c2b39;
+
+$light-umber: #978d8d;
 $warm-brown: #675e5a;
 $orange: #fa7335;
-$cool-green: #0d9f6e;
+
+$light-mint: #f7faf9;
+$green-slate: #5a717c;
+$cool-green: #0c6152;
+$bright-green: #0d9f6e;
 $green-gray: #8DB2A6;
+
 $text: #0F2B4F;
 $ivory: #f4f3ef;
 
@@ -163,19 +172,34 @@ $default-font-size_rems: 1.5rem;
   display: flex;
   display: -webkit-flex;
   display: -ms-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;  
+  -ms-flex-direction: column;
+}
+
+@mixin flex_col {
+  // position: relative;
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+
   flex-direction: row;
   -webkit-flex-direction: row;  
   -ms-flex-direction: row;
 }
 
-@mixin flex_col {
-  position: relative;
-  display: flex;
-  display: -webkit-flex;
-  display: -ms-flex;
-  flex-direction: column;
-  -webkit-flex-direction: column;  
-  -ms-flex-direction: column;
+@mixin linear-gradient($startColor, $startPercent, $endColor, $endPercent, $stopOneColor:$startColor, $stopOnePercent:$startPercent, $stopTwoColor:$endColor, $stopTwoPercent:$endPercent) {
+  background: $startColor; /* Old browsers */
+  background: -moz-linear-gradient(top,  $startColor $startPercent, $stopOneColor $stopOnePercent,$stopTwoColor $stopTwoPercent, $endColor $endPercent); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop($startPercent,$startColor), color-stop($stopOnePercent,$stopOneColor), color-stop($stopTwoPercent,$stopTwoColor), color-stop($endColor, $endPercent)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  $startColor $startPercent,$stopOneColor $stopOnePercent,$stopTwoColor $stopTwoPercent,$endColor $endPercent); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  $startColor $startPercent,$stopOneColor $stopOnePercent,$stopTwoColor $stopTwoPercent,$endColor $endPercent); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  $startColor $startPercent,$stopOneColor $stopOnePercent,$stopTwoColor $stopTwoPercent,$endColor $endPercent); /* IE10+ */
+  background: linear-gradient(to bottom,  $startColor $startPercent,$stopOneColor $stopOnePercent,$stopTwoColor $stopTwoPercent,$endColor $endPercent); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$startColor', endColorstr='$endColor',GradientType=0 ); /* IE6-9 */
+
 }
 
 /*** ===================== 
@@ -206,8 +230,9 @@ html, body > .ember-view {
 }
 
 body {
-  background: url(#{asset_path('178589874-1.jpg')}) no-repeat center center fixed;
-  background-size: cover;
+  // background: url(#{asset_path('178589874-1.jpg')}) no-repeat center center fixed;
+  // background-size: cover;
+  background: $light-slate;
   font-family: "Verdana" ,"Arial", "Helvetica", sans-serif;
   font-weight: normal;
   line-height: 125%;
@@ -248,13 +273,14 @@ body {
 }
   
 .logo {
-  letter-spacing: 2px;
-  @include font_size_for(24px);
+  margin-left: 20px;
+  letter-spacing: 0.018em;
+  @include font_size_for(19px);
   .logo_text {
     color: $cool-green;//$light-blue;
   }
   .network_text {
-    color: #ffffff;
+    color: $dark-blue;
   }
 }
 
@@ -329,9 +355,9 @@ h6 { @include font_size_for(16px); }
 
 .ribbon {
   // @include rounded(3px, 3px);
-  background: $dark-blue;//$mid-gray;
-  padding: 3px;
-  margin: 5px 0 3px;
+  background: $light-slate;//$mid-gray;
+  padding: 0;
+  margin: 0;
   color: #ffffff;
   position: relative;
   z-index: 2;
@@ -340,25 +366,30 @@ h6 { @include font_size_for(16px); }
       position: relative;
       float: left;
       text-align: center;
-      padding: 4px 8px;
       a {
-        color: $ivory;
+        color: $green-slate;
         text-decoration: none;
-        transition: color linear 0.32s;
+        transition: all linear 0.32s;
         &.nav-link {
           display: block;
           @include font_size_for(17.5px);
+          @include rounded(2px, 2px);
+          padding: 1.4em 1.2em 0;
 
-          &:hover {
-            color: $green-gray;
+          &:hover,
+          &:active,
+          &.active {
+            color: $cool-green;
+            @include box_shadowed(0,1px,3px,0, $cool-green);
+            background: #ffffff;
           }
         }
       }
     }
   }
   &.top {
-    line-height: 1.6em;
-    margin-top:1px;
+    line-height: 2.4rem;
+    border-bottom: 1px solid #ffffff;
     ul {
       li {
         a {
@@ -369,6 +400,24 @@ h6 { @include font_size_for(16px); }
           padding-right: 5em;
         }
         &.login,
+        &.user_edit {
+          background: url(#{asset_path('icons.png')}) -25px 5px no-repeat;
+          background-size: 225%, 225%;
+          width: 22px;
+          height: 22px;
+          position: absolute;
+          top: 5px;
+          right: 2%;
+          opacity: .65;
+          text-indent: -9999em;
+          &:hover {
+            opacity: 1;
+          }
+        }
+        &.user_edit {
+          right: 4.75%;
+          background-position: -1px 5px;
+        }
         &.greeting {
           float: right;
         }
@@ -376,13 +425,12 @@ h6 { @include font_size_for(16px); }
     }
   }
   &.menu {
-    height: 20px;
-    margin-top: -2px;
+    line-height: 3.2rem;
     margin-bottom: 1px;
-    background: $mid-gray;//$dark-blue;
+    @include linear-gradient(#0c2b39, 1%, #0c2b39, 100%, #f7faf9, 3%, #f7faf9, 95%);
+
     ul {
       li {
-        padding:1px 1.2em 4px;
         &.tool_item {
           float: right;
           color: $lp-gray;
@@ -402,6 +450,8 @@ h6 { @include font_size_for(16px); }
     }
   }
 }
+
+
 
 .app_version {
   position: absolute;
@@ -476,6 +526,62 @@ h6 { @include font_size_for(16px); }
     background: $light-blue;
 }
 
+.layout_pane {
+  background: #ffffff;
+  margin: 10px 5px;
+  position: relative;
+  &.styled {
+    @include box_shadowed(0, 0, 3px, 1px, $green-slate);
+    @include rounded(6px, 6px, 0, 0);
+  }
+  .inner_wrapper {
+    @include padded(10px, 10px);
+    position: relative;
+  }
+  .content_title {
+    background: $light-umber;
+    color: #ffffff;
+    @include font_size_for(16.5px);
+    @include rounded(6px, 6px, 0, 0);
+    .inner_wrapper {
+      @include padded(5px, 10px);
+    }
+    .collapse_icon {
+      @extend .icon;
+      position: absolute;
+      top: 2px;
+      right: 1%;
+      background: url(#{asset_path('icons.png')}) -2px 15px no-repeat;
+      &:hover {
+        background-position: -2px 35px;
+      }
+    }
+  }
+}
+
+.sidenav {
+  border-top-left-radius: 0;
+  margin-left: 0;
+  .title {
+    @include rounded(0, 6px, 0, 0);
+    background: $green-slate;
+    .inner_wrapper {
+      @include padded(5px, 10px);
+      text-align: left;
+      @include font_size_for(17px);
+      color: $light-mint;
+    }
+  }
+  height: 100%;
+}
+
+.breadcrumbs {
+  color: $cool-green;
+  background: none;
+  border-bottom: 4px solid $light-border-gray;
+  @include font_size_for(9.5px);
+}
+
 .pane {
   position: relative;
   margin: 0 auto 20px;
@@ -525,7 +631,7 @@ h6 { @include font_size_for(16px); }
     
     .data_row {
       position:relative;
-      padding: 10px 8px 9px;
+      padding: 10px 8px 9px 8px;
       @include font_size_for(17px);
       color: $warm-brown;
       border-bottom: 1px solid $pale-gray;
@@ -543,6 +649,25 @@ h6 { @include font_size_for(16px); }
     }
   }
 }// end pane....
+
+.data_row {
+  position:relative;
+  padding: 10px 8px 9px 8px;
+  margin-right: 20px;
+  @include font_size_for(17px);
+  color: $warm-brown;
+  -webkit-transition: background linear .25s;
+  transition: background linear .25s;
+  
+  &:hover {
+    background: rgba(lighten($pale-blue, 3%), .9);
+    cursor: pointer;
+
+    * {
+      color: invert($warm-brown);
+    }
+  }
+}
 
 .widget {
   position: relative;
@@ -568,7 +693,7 @@ h6 { @include font_size_for(16px); }
 /*** ===================== 
   EDIT/SHOW VIEW
 ===================== ***/
-.layout_cell.flipping {
+.flipping {
   position: relative;
   perspective: 800;
   -webkit-perspective: 800;
@@ -824,7 +949,11 @@ label {
 .flex_containers {
   padding: 0;
   margin: 0;
+  max-height: 100%;
+  max-width: 100%;
   overflow: hidden;
+  align-items: stretch;
+  align-content: stretch;
   // width: 100%;
 
   &.rows {
@@ -841,13 +970,13 @@ label {
     transition: width 0.25s ease-out;
     -webkit-transition: width 0.25s ease-out;
     -moz-transition: width 0.25s ease-out;
-    max-height: 100%;
-    max-width: 100%;
   }
 }
 
 /* flex widths ... */
-
+.x20 {
+  width: 19.975%;
+}
 .x25 {
   width: 24.75%;
 }
@@ -860,16 +989,24 @@ label {
 .x75 {
   width: 74.75%;
 }
+.x80 {
+  width: 79.19%;
+}
 .x {
-  width: 99.99%;
+  width: 99.98%;
 }
 
 /* flex heights ... */
 
+.y5 {
+  height: 4.95%;
+}
+.y10 {
+  height: 9.92%;
+}
 .y20 {
   height: 19.975%;
 }
-
 .y25 {
   height: 24.75%;
 }
@@ -882,8 +1019,11 @@ label {
 .y75 {
   height: 74.75%;
 }
+.y80 {
+  height: 79.91%;
+}
 .y {
-  height: 99.99%;
+  height: 99.98%;
 }
 
 .resize_handler {

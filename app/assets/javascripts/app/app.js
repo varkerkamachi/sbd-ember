@@ -20,6 +20,8 @@ SBD.Router.map(function() {
   this.route('about', { path: '/about' });
 
   this.route('dashboard', { path: '/sbd-dash'});
+  
+  //this.route('manage', { path: '/manage'});
 
   this.resource('remotes', function() {
     this.route('new');
@@ -27,11 +29,14 @@ SBD.Router.map(function() {
   });
   this.resource('remote', { path: 'remotes/:remote_id' });
 
-  this.resource('notes', function(){
-    this.resource('note', { path: '/:note_id' }, function() {
-      this.route('edit');
+  this.resource('manage', function() {
+    this.resource('notes', function(){
+      this.resource('note', { path: '/:note_id' }, function() {
+        this.route('edit');
+      });
+      this.route('create');
     });
-    this.route('create');
+
   });
   this.route('missing', { path: '/*path'});
 });
@@ -110,6 +115,12 @@ SBD.DashboardRoute = Ember.Route.extend({
   },
   renderView: function() {
     this.render('app/dashboard/index');
+  }
+});
+
+SBD.ManageRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render('app/manage/index');
   }
 });
 

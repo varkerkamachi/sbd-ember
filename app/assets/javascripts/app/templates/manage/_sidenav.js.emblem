@@ -1,0 +1,5 @@
+ul
+  li
+    = link-to 'notes.index' | Notes
+  li
+    = link-to 'remotes.index' | User management

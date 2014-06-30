@@ -1,0 +1,16 @@
+.flex_containers.cols.y.x
+  .flex_cells.y.x25.left
+    .layout_pane.styled.sidenav
+      .title
+        .inner_wrapper
+          ' Management
+      .inner_wrapper.clearfix
+        = partial "app/manage/sidenav"
+    /= partial "app/notes/form"
+
+  .flex_containers.rows.y.x
+    .flex_cells.x.y5
+      .layout_pane.breadcrumbs
+        ' crumb > of bread > another
+    = outlet  
+
