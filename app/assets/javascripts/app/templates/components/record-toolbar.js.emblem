@@ -1,10 +1,11 @@
-.toolbar.clearfix
-  .left
-    = link-to 'notes' class='cancel_icon'
-      cancel
-  .right
-    = if isEditing
-      '
-    = else
-      =link-to model_edit_path class="edit_icon" title="click to edit" click=toggleEdit
-        edit
+.content_title
+  .padded_5
+    .toolbar.clearfix
+      .left
+        = link-to cancelUrl class='cancel_icon'
+          cancel
+      .right
+        = if editActive
+          '
+        = else
+          a.edit_icon title="click to edit" click=onToggleEditClick edit

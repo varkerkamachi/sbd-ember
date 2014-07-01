@@ -1,19 +1,17 @@
-.aab
-  .layout_cell
-    .search.widget.clearfix
-      .title_bar
-        h6 Search
-      .content
- 
-    .recent.widget
-      .title_bar
-        h6 Recently updated
-      .content
-        |
-          Content here
+.flex_cells.y.x25.left.hresizable
+  .layout_pane.styled
+    .content_title
+      .inner_wrapper
+        h5 Remotes
+        /.collapse_icon
+    .inner_wrapper
+      ul.results_list
+        each remote in allSorted
+          = panedata-listitem model=remote showActionUrl="remote.index" editActionUrl="remote.edit" action="deleteRemote"
 
-  .layout_cell
-    ul.results_list
-      each remote in remotes
-        = partial "app/remotes/pane_data_item"
-
+.flex_cells.y.x25.left.hresizable
+  .resize_handles.hresize_handler
+  .inner_wrapper
+    .flipping
+      = outlet
+  

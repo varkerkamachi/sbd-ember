@@ -1,8 +1,10 @@
 SBD.RemotesView = Ember.View.extend({
-  layoutName: 'app/remotes/remotesindex',
+  layoutName: 'app/container/flex_ab',
   templateName: 'app/remotes/remotes',
-  attributeBindings: ['draggable'],
-  draggable: true,
   classNames: 'full_height',
   
+  paneTitle: function() {
+    return "Notes"
+  },
+
 });

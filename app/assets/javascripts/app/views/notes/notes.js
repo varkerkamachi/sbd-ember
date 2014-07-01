@@ -1,5 +1,5 @@
 SBD.NotesView = Ember.View.extend({
-  layoutName: 'app/manage/split-pane',
+  layoutName: 'app/container/flex_ab',
   templateName: 'app/notes/notes',
   classNames: 'full_height',
   

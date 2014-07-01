@@ -3,31 +3,37 @@
     .front.face
 
     .back.face.layout_pane.styled
-      = record-toolbar cancelUrl="notes" editActive=this.isEditing action="toggleEdit"
+      = record-toolbar cancelUrl="remotes" editActive=this.isEditing action="toggleEdit"
+
       .inner_wrapper
-        h3.view_title Editing Note ##{model.id}
+        h3.view_title Editing Remote ##{model.id}
         %br
         form
           .content_table
             .content_table_row
               Ember.TextField valueBinding="model.name" class="full_width" autofocus="true" autofocus="autofocus" tabindex="1"
             .content_table_row
+              Ember.TextField valueBinding="model.url" class="full_width" autofocus="true" autofocus="autofocus" tabindex="2"
+            .content_table_row
               Ember.TextArea valueBinding="model.note" class="full_width"
             .content_table_row.preview.accented 
 
             .content_table_row.clearfix
-              button class="edit_button right" click=updateNote Update
+              button class="edit_button right" click=updateRemote Update
 
   = else
     .back.face
 
     .front.face.layout_pane.styled
-      = record-toolbar cancelUrl="notes" editActive=this.isEditing action="toggleEdit"
+      = record-toolbar cancelUrl="remotes" editActive=this.isEditing action="toggleEdit"
       .inner_wrapper
-        h3.view_title Note
+        h3.view_title Remote
         
         p.edit_label.accented name
         h5 = model.name
         
+        p.edit_label.accented name
+        h5 = model.url
+
         p.edit_label.accented note
         p.paragraph_text = model.note

@@ -22,12 +22,14 @@ SBD.Router.map(function() {
   this.route('dashboard', { path: '/sbd-dash'});
   
   //this.route('manage', { path: '/manage'});
-
-  this.resource('remotes', function() {
-    this.route('new');
-    this.route('edit', { path: ':remote_id/edit' });
+  this.resource('devices', function() {
+    this.resource('remotes', function(){
+      this.resource('remote', { path: '/:remote_id' }, function() {
+        this.route('edit');
+      });
+      this.route('create');
+    });
   });
-  this.resource('remote', { path: 'remotes/:remote_id' });
 
   this.resource('manage', function() {
     this.resource('notes', function(){
@@ -36,8 +38,9 @@ SBD.Router.map(function() {
       });
       this.route('create');
     });
-
   });
+  
+
   this.route('missing', { path: '/*path'});
 });
 
@@ -50,7 +53,33 @@ SBD.MissingRoute = Ember.Route.extend({
 /* Store and models */
 SBD.ApplicationAdapter = DS.RESTAdapter.extend();
 
-/* routes */
+/* ======== ROUTES ================ */
+
+/** PARENT/ORGANIZATIONAL ROUTES **/
+/** DASHBOARD COMING SOON... **/
+SBD.DashboardRoute = Ember.Route.extend({
+  controllerName: 'dashboard',
+  renderTemplate: function() {
+    this.render('app/dashboard/index');
+  },
+  renderView: function() {
+    this.render('app/dashboard/index');
+  }
+});
+/** CRUD STUFF... NOTES, ETC **/
+SBD.ManageRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render('app/manage/index');
+  }
+});
+/** DEVICES...CONFIG, TOPOLOGY... **/
+SBD.DevicesRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render('app/devices/index');
+  }
+});
+
+/** REMOTES **/
 SBD.RemotesRoute = Ember.Route.extend({
   model: function() {
     return this.store.findAll('remote');
@@ -59,29 +88,25 @@ SBD.RemotesRoute = Ember.Route.extend({
     controller.set('remotes', model);
   }
 });
-SBD.RemoteRoute = Ember.Route.extend({
-  model: function(params) {
-    return this.store.find('remote', params.remote_id);
-  },
-  setupController: function(controller, model) {
-    controller.set('remote', model);
-    console.log("model: " + model);
-}
-});
-SBD.RemotesNewRoute = Ember.Route.extend({
-  renderTemplate: function() {
-    this.render({ outlet: 'modelForm' });
-  }
-});
-SBD.RemotesEditRoute = Ember.Route.extend({
-  model: function(params) {
-    return this.store.find('remote', params.remote_id);
-  },
-  renderTemplate: function() {
-    this.render({ outlet: 'modelForm' });
+
+SBD.RemoteIndexRoute = Ember.Route.extend({
+  controllerName: 'remote.index',
+  renderTemplate: function(note) {
+    this.controller.set('isEditing', false);
+    this.render('app/remotes/remote/index');
   }
 });
 
+SBD.RemoteEditRoute = Ember.Route.extend({
+  controllerName: 'remote.index',
+  renderTemplate: function(note) {
+    this.get('controller').send('toggleEditTo', 'true');
+    this.render('app/remotes/remote/index');
+  },
+
+});
+
+/** NOTES **/
 SBD.NotesRoute = Ember.Route.extend({
   model: function() {
     return this.store.findAll('note');
@@ -108,20 +133,5 @@ SBD.NoteEditRoute = Ember.Route.extend({
 
 });
 
-SBD.DashboardRoute = Ember.Route.extend({
-  controllerName: 'dashboard',
-  renderTemplate: function() {
-    this.render('app/dashboard/index');
-  },
-  renderView: function() {
-    this.render('app/dashboard/index');
-  }
-});
-
-SBD.ManageRoute = Ember.Route.extend({
-  renderTemplate: function() {
-    this.render('app/manage/index');
-  }
-});
 
 

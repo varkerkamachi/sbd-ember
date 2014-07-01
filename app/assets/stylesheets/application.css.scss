@@ -138,9 +138,9 @@ $default-font-size_rems: 1.5rem;
 }
 
 @mixin side_flip {
-  transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 @mixin button {
@@ -232,7 +232,7 @@ html, body > .ember-view {
 body {
   // background: url(#{asset_path('178589874-1.jpg')}) no-repeat center center fixed;
   // background-size: cover;
-  background: $light-slate;
+  background: $light-border-gray;
   font-family: "Verdana" ,"Arial", "Helvetica", sans-serif;
   font-weight: normal;
   line-height: 125%;
@@ -299,12 +299,12 @@ body {
 }
 
 
-h1 { @include font_size_for(32px); }
-h2 { @include font_size_for(27px); }
-h3 { @include font_size_for(24px); }
-h4 { @include font_size_for(20px); }
-h5 { @include font_size_for(18px); }
-h6 { @include font_size_for(16px); }
+h1 { @include font_size_for(32px); @include text_shadow(0, 0, 1px, #ffffff); }
+h2 { @include font_size_for(27px); @include text_shadow(0, 0, 1px, #ffffff); }
+h3 { @include font_size_for(24px); @include text_shadow(0, 0, 1px, #ffffff); }
+h4 { @include font_size_for(20px); @include text_shadow(0, 0, 1px, #ffffff); }
+h5 { @include font_size_for(18px); @include text_shadow(0, 0, 1px, #ffffff); }
+h6 { @include font_size_for(16px); @include text_shadow(0, 0, 1px, #ffffff); }
 
 
 /*** ===================== 
@@ -373,7 +373,7 @@ h6 { @include font_size_for(16px); }
         &.nav-link {
           display: block;
           @include font_size_for(17.5px);
-          @include rounded(2px, 2px);
+          @include rounded(0, 0, 2px, 2px);
           padding: 1.4em 1.2em 0;
 
           &:hover,
@@ -381,7 +381,7 @@ h6 { @include font_size_for(16px); }
           &.active {
             color: $cool-green;
             @include box_shadowed(0,1px,3px,0, $cool-green);
-            background: #ffffff;
+            background: rgba(255,255,255,.65);
           }
         }
       }
@@ -527,24 +527,25 @@ h6 { @include font_size_for(16px); }
 }
 
 .layout_pane {
-  background: #ffffff;
-  margin: 10px 5px;
+  background-color: $pale-gray;
+  margin: 10px;
   position: relative;
   &.styled {
-    @include box_shadowed(0, 0, 3px, 1px, $green-slate);
-    @include rounded(6px, 6px, 0, 0);
+    @include box_shadowed(0, 0, 5px, 1px, $mid-gray);
+    @include rounded(4px, 4px, 0, 0);
   }
   .inner_wrapper {
     @include padded(10px, 10px);
     position: relative;
   }
   .content_title {
-    background: $light-umber;
-    color: #ffffff;
+    background: $ivory;
+    border-bottom: 1px solid $light-border-gray;
+    color: $dark-blue;
     @include font_size_for(16.5px);
-    @include rounded(6px, 6px, 0, 0);
+    @include rounded(4px, 4px, 0, 0);
     .inner_wrapper {
-      @include padded(5px, 10px);
+      @include padded(10px, 10px);
     }
     .collapse_icon {
       @extend .icon;
@@ -560,16 +561,39 @@ h6 { @include font_size_for(16px); }
 }
 
 .sidenav {
+  background-color: #ffffff;
   border-top-left-radius: 0;
   margin-left: 0;
   .title {
-    @include rounded(0, 6px, 0, 0);
+    @include rounded(0, 4px, 0, 0);
     background: $green-slate;
     .inner_wrapper {
       @include padded(5px, 10px);
       text-align: left;
       @include font_size_for(17px);
       color: $light-mint;
+    }
+  }
+
+  ul, li {
+    display: none outside none;
+  }
+  ul li a {
+    display: block;
+    @include padded(10px, 5px);
+    @include rounded(2px, 2px);
+    line-height: 1.3em;
+    color: $cool-green;
+    @include font_size_for(14px);
+    &:hover {
+      background-color: $pale-gray;
+      color: $dark-blue;
+    }
+    &:active,
+    &.active {
+      border-left: 5px solid $light-slate;
+      background: $ivory;
+      padding-left: 10px;
     }
   }
   height: 100%;
@@ -581,6 +605,33 @@ h6 { @include font_size_for(16px); }
   border-bottom: 4px solid $light-border-gray;
   @include font_size_for(9.5px);
 }
+
+.resize_handles {
+  font-size: 0.01em;
+  position: absolute;
+  z-index: 15;
+  background: rgba(255,255,255,.35) url(#{asset_path('drag_handles.png')}) 0 center no-repeat;
+  @include rounded(2px, 2px);
+  @include box_shadowed(0, 0, 2px, 0, $green-slate);
+  &.hresize_handler {
+    @extend .resize_handles;
+    height: 100%;
+    top: 0;
+    width: 6px;
+    left: -2px;
+    cursor: e-resize;
+  }
+  &.vresize_handler {
+    @extend .resize_handler;
+    width: 100%;
+    height: 6px;
+    left: 0;
+    bottom: 0;
+    cursor: s-resize;
+  }
+
+}
+
 
 .pane {
   position: relative;
@@ -652,15 +703,14 @@ h6 { @include font_size_for(16px); }
 
 .data_row {
   position:relative;
-  padding: 10px 8px 9px 8px;
-  margin-right: 20px;
+  padding: 6px 8px;
   @include font_size_for(17px);
   color: $warm-brown;
   -webkit-transition: background linear .25s;
   transition: background linear .25s;
   
   &:hover {
-    background: rgba(lighten($pale-blue, 3%), .9);
+    background: rgba($light-mint, .9);
     cursor: pointer;
 
     * {
@@ -702,32 +752,31 @@ h6 { @include font_size_for(16px); }
   transition: all 0.25s ease-in-out;
   transform-style: preserve-3d;
   position: relative;
-  height: 95%;
-  width: 95%;
-  margin: 2.5%;
+  // height: 95%;
+  // width: 95%;
+  // margin: 2.5%;
 
   .face {
     width: 98%;
-    height: 300px;
+    // height: 300px;
     position: absolute;
-    border-radius: 4px;
-    border: 5px solid $ivory;
+    // border-radius: 4px;
+    // border: 5px solid $ivory;
   }
 
   .front,
   .back {
-    box-shadow: 0 0 6px $mid-gray;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   .front {
     z-index: 2;
-    background: #ffffff;
   }
 
   .back {
-    background-color: $pale-gray;
     @include side_flip;
   }
 }
@@ -777,12 +826,11 @@ $ivory: #f4f3ef;
 /*** ===================== 
   EDIT/SHOW TOOLBAR
 ===================== ***/
-.toolbar {
-  border-bottom: 1px solid #c8d2d4;
-  margin-bottom: 0.15em;
-  padding: 5px 10px 8px;
-  background: $ivory;
-}
+// .toolbar {
+//   margin-bottom: 0.15em;
+//   padding: 5px 10px 8px;
+//   background: $ivory;
+// }
 
 
 /*** ===================== 
@@ -791,7 +839,7 @@ $ivory: #f4f3ef;
 .delete_wrapper {
   position: absolute;
   top: 40px;
-  right: -15px;
+  right: -5px;
   z-index: 3;
   background: $pale-gray;
   @include rounded(2px, 2px);
@@ -1024,30 +1072,6 @@ label {
 }
 .y {
   height: 99.98%;
-}
-
-.resize_handler {
-  position: absolute;
-  padding: 1px;
-  background: black;
-  font-size: 0.1em;
-}
-
-.hresize_handler {
-  @extend .resize_handler;
-  width: 5px;
-  height: 100%;
-  top: 0;
-  right: -2px;
-  cursor: e-resize;
-}
-.vresize_handler {
-  @extend .resize_handler;
-  width: 100%;
-  height: 5px;
-  left: 0;
-  bottom: 0;
-  cursor: s-resize;
 }
 
 /*

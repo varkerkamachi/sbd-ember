@@ -4,50 +4,67 @@ SBD.RemotesController = Ember.ArrayController.extend({
   }.property('length'),
   // notesCount: Ember.computed.alias('length'),
   logo: "",
-  sortProperties: ['name'],
-  sortAscending: true,
-  init: function(remote) {
-    console.log("\nediting?" + this.get('remotesCount'));
-    // noneInEditMode();
-  },
-  
+  sortProperties: ['updated_at:desc', 'name:asc'],
+  //sortAscending: true,
+  allSorted: Ember.computed.sort('remotes', 'sortProperties'),
+  buttonText: 'Add New',
+  isActive: false,
+  formWrapperClass: 'new_form_wrapper',
+  errors: false,
+
   paneTitle: function() {
-    return "Remotes";
+    return "Remotes"
   }.property(),
 
-  actions: {
 
-    toggleNewForm: function(className) {
-      var cText = $(className).text();
-      var f = this.send('swapButtonText', className, cText);
-      $('.new_form_wrapper').animate({
-        visibility: "toggle",
-      }, 150, function() { f; });
-    },
-    
-    swapButtonText: function(el, text) {
-      $(el).text(text == 'Add New' ? 'Cancel' : 'Add New');
+  actions: {
+    setActive: Ember.computed(this.isActive, function() {
+      return this.isActive == true ? false : true;
+    }),
+
+    toggleText: function() {
+      // console.log('active/' + this.isActive);
+      this.toggleProperty('isActive');
+      console.log('remotes toggle - active/' + this.isActive);
+
+      this.send('toggleNewForm');
+      if( this.isActive == true ) {
+        this.set('buttonText', 'Close');
+      }
+      else {
+        this.set('buttonText', 'Add New');
+      }
     },
     
     createRemote: function() {
       var name = this.get('name');
-      var note = this.get('note');
       var url = this.get('url');
+      var note = this.get('note');
+      // if(!name.trim()) { return; }
 
-      var newObj = this.store.createRecord('remote', {
+      //if(this.send('validateForm', this.name, this.note)) {
+      //},
+      var obj = this.store.createRecord('note', {
           name: name,
-          note: note,
-          url:  url
+          url: url,
+          note: note
         });
       this.set('name', '');
-      this.set('note', '');
       this.set('url', '');
-
-      newObj.save();
-      this.send('toggleNewForm');
+      this.set('note', '');
+        
+      obj.save();
+      //console.log('form vis: ' + this.formIsVisible)
+      this.send('toggleText');
       this.transitionToRoute('remotes');
     },
-    
+
+    toggleNewForm: function() {
+      $('.' + this.formWrapperClass + '').animate({
+        visibility: "toggle",
+      }, 75);
+    },
+ 
     deleteRemote: function(model) {
       // passed by action from view to controller...if not here then it looks in Route
       this.get('store').find('remote', model.id).then(function(record){

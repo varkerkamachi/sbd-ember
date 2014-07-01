@@ -1,0 +1,7 @@
+ul
+  li
+    = link-to '' | Configuration
+  li
+    = link-to 'remotes.index' | Remotes
+  li
+    = link-to '' | Topology
