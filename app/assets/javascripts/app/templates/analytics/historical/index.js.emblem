@@ -1,0 +1,23 @@
+.flex_containers.rows.y25.x
+  .flex_cells.y25.x.vresizable
+    .layout_pane.styled
+      .content_title
+        .inner_wrapper
+          h5 Historical Analytics
+      .inner_wrapper
+        ul.results_list
+          li.data_row.clearfix
+            a Historical Analytic
+          li.data_row.clearfix
+            a Another historical Analytic
+          li.data_row.clearfix
+            a More Analytics to click on
+  .resize_handles.vresize_handler
+
+.flex_containers.rows.y75.x
+  .flex_cells.x.vresizable
+    .layout_pane.styled
+      .inner_wrapper.mock_image
+        /img src='assets/mock_analytic.png'
+        = outlet
+/ = view Ember.HistoricalAnalyticsView

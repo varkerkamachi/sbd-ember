@@ -1,0 +1,5 @@
+ul
+  li
+    = link-to 'real_time.index' | Real Time
+  li
+    = link-to 'historical.index' | Historical

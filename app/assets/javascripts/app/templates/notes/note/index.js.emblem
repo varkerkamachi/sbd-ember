@@ -1,4 +1,4 @@
-.record_flip{{bind-attr class="isEditing:editing"}}
+div{{bind-attr class="isEditing:editing"}}
   = if this.isEditing
     .front.face
 

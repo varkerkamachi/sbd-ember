@@ -19,9 +19,25 @@ SBD.Router = Ember.Router.extend();
 SBD.Router.map(function() {
   this.route('about', { path: '/about' });
 
-  this.route('dashboard', { path: '/sbd-dash'});
+  //this.route('dashboard', { path: '/sbd-dash'});
+  this.resource('alerts', { path: '/alerts' });
+
+  this.resource('analytics', function() {
+    this.resource('real_time', function() {
+      this.resource('live_analytic', { path: '/:analytic_id' }, function() {
+        this.route('edit');
+      });
+      this.route('create');
+    });
+
+    this.resource('historical', function() {
+      this.resource('historical_analytic', { path: '/:analytic_id' }, function() {
+        this.route('edit');
+      });
+      this.route('create');
+    });
+  });
   
-  //this.route('manage', { path: '/manage'});
   this.resource('devices', function() {
     this.resource('remotes', function(){
       this.resource('remote', { path: '/:remote_id' }, function() {
@@ -57,6 +73,7 @@ SBD.ApplicationAdapter = DS.RESTAdapter.extend();
 
 /** PARENT/ORGANIZATIONAL ROUTES **/
 /** DASHBOARD COMING SOON... **/
+/*
 SBD.DashboardRoute = Ember.Route.extend({
   controllerName: 'dashboard',
   renderTemplate: function() {
@@ -66,6 +83,7 @@ SBD.DashboardRoute = Ember.Route.extend({
     this.render('app/dashboard/index');
   }
 });
+*/
 /** CRUD STUFF... NOTES, ETC **/
 SBD.ManageRoute = Ember.Route.extend({
   renderTemplate: function() {
@@ -76,6 +94,25 @@ SBD.ManageRoute = Ember.Route.extend({
 SBD.DevicesRoute = Ember.Route.extend({
   renderTemplate: function() {
     this.render('app/devices/index');
+  }
+});
+
+SBD.AlertsRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render('app/alerts/index');
+  }
+});
+
+SBD.AnalyticsRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render('app/analytics/index');
+  }
+});
+
+SBD.HistoricalIndexRoute = Ember.Route.extend({
+  controllerName: 'historical.analytics',
+  renderTemplate: function() {
+    this.render('app/analytics/historical/index');
   }
 });
 

@@ -3,10 +3,9 @@
     .layout_pane.styled.sidenav
       .title
         .inner_wrapper
-          ' Settings
+          ' Analytics
       .inner_wrapper.clearfix
-        = partial "app/manage/sidenav"
-    /= partial "app/notes/form"
+        = partial "app/analytics/sidenav"
 
   .flex_containers.rows.y.x
     .flex_cells.x.y5

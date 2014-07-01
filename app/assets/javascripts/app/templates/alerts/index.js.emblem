@@ -3,9 +3,9 @@
     .layout_pane.styled.sidenav
       .title
         .inner_wrapper
-          ' Settings
+          ' Alert Management
       .inner_wrapper.clearfix
-        = partial "app/manage/sidenav"
+        = partial "app/alerts/sidenav"
     /= partial "app/notes/form"
 
   .flex_containers.rows.y.x

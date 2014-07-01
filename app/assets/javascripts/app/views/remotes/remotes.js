@@ -1,5 +1,5 @@
 SBD.RemotesView = Ember.View.extend({
-  layoutName: 'app/container/flex_ab',
+  layoutName: 'app/layout/flex_ab',
   templateName: 'app/remotes/remotes',
   classNames: 'full_height',
   

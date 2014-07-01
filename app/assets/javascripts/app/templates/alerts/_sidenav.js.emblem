@@ -1,0 +1,5 @@
+ul
+  li
+    = link-to '' | Alerts
+  li
+    = link-to '' | ...
